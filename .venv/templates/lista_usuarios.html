@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Usuários</title>
+    <link rel="stylesheet" href="/static/cadastro.css">
+    
+</head>
+<body>
+    <div id="titulo">
+        <h1>Lista de Usuários</h1>   
+    </div>
+    
+    <div id="cadastrar_usuario">
+        <div id="cadastrar">
+            <div>
+                cadastrar:
+            </div>
+            <div id="formulario_cadastrar">
+                <form action="/adm/cadastrar" method="POST">
+                    <label for="nome">  Nome</label>
+                    <input type="text" id="nome" name="nome">
+
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email">
+
+                    <label for="senha">Senha</label>
+                    <input type="password" id="senha" name="senha">
+                    <input type="checkbox" id="mostrar" onclick="mostrarOcultarSenha_cadastrar()">
+
+                    <label for="conformar_senha">Confirmar Senha</label>
+                    <input type="password" id="confirmar_senha" name="confirmar_senha">
+                    <input type="checkbox" id="mostrar" onclick="mostrarOcultarSenha_validar()">
+
+                    <br>
+
+                    <label for="adm">Usuario sera adm</label>
+                    <input type="checkbox" id="adm_cadastrar" name="adm_cadastrar">
+
+                    <input type="submit" value="submit" id="botao_cadastrar">
+                </form>
+            </div>
+        </div>
+    </div>
+    
+
+    <br>
+    
+    <div id="tabela_usuarios">
+        <section id="usuarios">
+            <table id="tabela" cellspacing="10">
+                <thead>
+                    <tr>
+                        <th>    ID  </th>
+                        <th>    Nome    </th>
+                        <th>    Email   </th>
+                        <th>    Senha   </th>
+                        <th>    Ações   </th> 
+                        <th>    ADM </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for usuario_final in usuario_final %}
+                        <tr>
+                            <td>    {{ usuario_final['id'] }}   </td>
+                            <td>    {{ usuario_final['nome'] }} </td>
+                            <td>    {{ usuario_final['email'] }}    </td>
+                            <th>    *** </th>
+                            <th>    {{usuario_final['adm']}}    </th>
+                            <td>
+                                <a href="/adm/{{usuario_final.id}}/atualiza">Atualizar</a>
+                                <a href="/adm/{{usuario_final.id}}">Deletar</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </div>
+
+
+    {% if usuario != undefined %}
+    <section class="modal">
+        <div id="card">
+
+            <a href="/adm" id="fechar">x</a>
+
+            <h2>Confirmação</h2>
+
+            <hr>
+
+            <p>Deseja realmente deletar o usuario {{usuario.nome}}</p>
+
+            <div id="botoes">
+                <a href="/adm/{{usuario.id}}/deletar" id="confirmar">Confirmar</a>
+                <a href="/adm" id="cancelar">Cancelar</a>
+            </div>
+
+        </div>
+    </section>
+    {% endif %}
+
+    {% if usuario_atualiza != undefined %}
+       
+        <section class="modal">
+            <div id="card">
+
+                <a href="/adm" id="fechar">x</a>
+
+                <h2>Atualizando usuário {{usuario_atualiza.nome}}</h2>
+                <form action="/adm/{{usuario_atualiza.id}}/atualizar" method="POST">
+                    <div>
+                        <label for="nome">Nome</label>
+                        <input type="text" id="nome" name="nome" value="{{usuario_atualiza.nome}}">  
+                    </div>
+                    <div>
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" value="{{usuario_atualiza.email}}">  
+                    </div>
+                    <div>
+                        <label for="senha">Senha</label>
+                        <input type="password" id="senha_form" name="senha" value="{{usuario_atualiza.senha}}"> 
+                        <input type="checkbox" id="mostrar" onclick="mostrarOcultarSenha()">
+                    </div>
+                    <div>
+                        <label for="adm">Modificar permição</label>
+                        <input type="checkbox" id="adm_alterar" name="adm_alterar">
+                    </div>
+                    <div>
+                        <input type="submit" value="Atualizar">
+                        <a href="/adm" id="cancelar">Cancelar</a>
+                    </div>
+                </form>
+
+            </div>
+        </section>
+       
+{% endif %}
+
+<script>
+    function mostrarOcultarSenha() {
+        var senha = document.getElementById('senha_form');
+        var senha_cadastrar = document.getElementById('senha');
+        var senha_validar = document.getElementById('confirmar_senha');
+        console.log(senha.type)
+
+        console.log('Função mostrarOcultarSenha foi chamada.'); // Adicione esta linha para depuração
+
+        if (senha.type === 'password') {
+            senha.setAttribute('type','text');
+        } else {
+            senha.type = 'password';
+        }
+    }
+</script>
+<script>
+    function mostrarOcultarSenha() {
+        var senha = document.getElementById('senha_form');
+        var senha_cadastrar = document.getElementById('senha');
+        var senha_validar = document.getElementById('confirmar_senha');
+        console.log(senha.type)
+
+        console.log('Função mostrarOcultarSenha foi chamada.'); // Adicione esta linha para depuração
+
+        if (senha.type === 'password') {
+            senha.setAttribute('type','text');
+        } else {
+            senha.type = 'password';
+        }
+    }
+</script>
+<script>
+    function mostrarOcultarSenha_cadastrar() {
+        var senha_cadastrar = document.getElementById('senha');
+        console.log(senha_cadastrar.type)
+
+        console.log('Função mostrarOcultarSenha foi chamada.'); // Adicione esta linha para depuração
+
+        if (senha_cadastrar.type === 'password') {
+            senha_cadastrar.setAttribute('type','text');
+        } else {
+            senha_cadastrar.type = 'password';
+        }
+    }
+</script>
+<script>
+    function mostrarOcultarSenha_validar() {
+        var senha_validar = document.getElementById('confirmar_senha');
+        console.log(senha_validar.type)
+
+        console.log('Função mostrarOcultarSenha foi chamada.'); // Adicione esta linha para depuração
+
+        if (senha_validar.type === 'password') {
+            senha_validar.setAttribute('type','text');
+        } else {
+            senha_validar.type = 'password';
+        }
+    }
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,163 @@
+body{
+    background-image: url("../static/img/por_do_sol2.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+}
+
+section.modal{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.738);
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: auto;
+}
+
+section.modal div#card{
+    width: 28rem;
+    height: 18rem;
+    position: relative;
+    background-color: aliceblue;
+    border-radius: 5%;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+}
+
+section.modal div#card a#fechar{
+    position: absolute;
+    right: 2%;
+    top: 1%;
+    width: 5%;
+    font-size: large;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-decoration: none;
+    color: rgb(0, 42, 255);
+    border-radius: 10%;
+    display: flex;
+    justify-content: center;
+}
+
+section.modal div#card a#fechar:hover{
+    position: absolute;
+    right: 2%;
+    top: 1%;
+    font-size: x-large;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-decoration: none;
+    background-color: red;
+    color: white;
+}
+
+section.modal div#card hr{
+    width: 90%;
+    margin: 0 auto;
+}
+
+section.modal div#card p{
+    font-size: large;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+section.modal div#card div#botoes{
+    position: absolute;
+    bottom: 2%;
+    right: 2%;
+    display: flex;
+    padding: 2rem 2rem 2rem 2rem;
+    text-decoration: none;
+}
+
+section.modal div#card div#botoes a{
+    text-decoration: none;
+    padding: 3%;
+    border: solid;
+    border-radius: 10%;
+}
+
+section.modal div#card div#botoes a#confirmar{
+    background-color: aliceblue;
+    border-color: black;
+    color: black;
+}
+section.modal div#card div#botoes a#confirmar:hover{
+    background-color: black;
+    border-color: black;
+    color: white;
+}
+
+section.modal div#card div#botoes a#cancelar{
+    background-color: white;
+    border-color: red;
+    color: black;
+}
+
+section.modal div#card div#botoes a#cancelar:hover{
+    background-color: red;
+    border-color: red;
+    color: white;
+}
+
+
+/*tiutlo*/
+div#titulo{
+    display: flex;
+    justify-content: space-around;
+    top: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: black;
+    margin: 0%;
+    padding: 1%;
+}
+
+/*cadastrarusuario*/
+div#cadastrar_usuario{
+    display: flex;
+    justify-content: space-around;
+    padding: 1%;
+}
+
+div#cadastrar_usuario div#cadastrar{
+    border: solid;
+    border-radius: 3%;
+    width: max-content;
+    background-color: white;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    display: flex;
+    align-items: center;
+    align-self: center;
+    justify-content: flex-start;
+    padding: 1% ;
+}
+
+div#cadastrar_usuario div#cadastrar input{
+    border-radius: 10%;
+}
+
+/*usuarios*/
+div#tabela_usuarios{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+div#tabela_usuarios section#usuarios{
+    display: flex;
+    justify-content: space-evenly;
+    background-color: white;
+    border: solid;
+    border-radius: 5%;
+    width: 50%;
+}
+
+div#tabela_usuarios section#usuario table#tabela{
+    border-radius: 10%;
+}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produção de soja</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/algoritmo.css">
+</head>
+
+<body class="back_ground">
+    <div>
+        <a href="/logout">logout</a>
+    </div>
+
+    <div class="content">
+
+
+        <div class="drop_box">
+            <div>
+                <h1>
+                    🌱 Cidades do Parana 🌱
+                </h1><br><br>
+                <form action="/inicial" method="POST">
+                    <label for="select_city">Selecione uma cidade:</label>
+                    <select id="select_city" name="cidade" class="js-select2">
+                        <option value="">Escolha uma cidade</option>
+                        {% for cidade in cidades %}
+                        <option value="{{ cidade }}">{{ cidade }}</option>
+                        {% endfor %}
+                    </select>
+                    <br><br>
+                    <input type="submit" id="submit_button" disabled class="butao">
+                </form>
+            </div>
+        </div>
+
+
+        {% if select_city %}
+            <div class="grafico" >
+                {{ select_city | safe }}
+            </div>
+        {% endif %}
+
+
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+    <script>
+        // Inicialize o Select2 para o dropdown
+        $(document).ready(function () {
+            $(".js-select2").select2();
+        });
+
+        // Verificar o valor do select e habilitar/desabilitar o botão
+        $("#select_city").on("input", function () {
+            if ($(this).val() !== "") {
+                $("#submit_button").prop("disabled", false);
+            } else {
+                $("#submit_button").prop("disabled", true);
+            }
+        });
+
+        $("#submit_button").on("click", function (e) {
+
+        // Exibir a div "grafico" removendo a classe "hidden"
+        $(".grafico").css("display", "flex");
+    });
+
+    </script>
+
+
+
+</body>
+
+</html>
