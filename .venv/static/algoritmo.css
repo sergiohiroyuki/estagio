@@ -15,21 +15,21 @@ html {
 body {
     margin: 0 0 var(--header-height) 0;
     font-family: 'Poppins';
-}
-
-.back_ground {
-    display: flex;
     background-image: url("../static/img/por_do_sol1.jpg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
     position: relative;
+}
+
+#posicao{
+    display: flex;
     justify-content: center;
-    margin-top: 15%;
 }
 
 .drop_box {
     display: flex;
+    flex-direction: column;
     margin: none;
     border: none;
     padding: 1.5rem;
@@ -37,7 +37,7 @@ body {
     justify-content: center;
     border: solid black;
     border-radius: 1rem;
-    background-color: rgba(255, 255, 255, 1);
+    background-color: rgba(255, 255, 255, 0.5);
     padding-bottom: 5rem;
     padding-top: 5rem;
     margin-bottom: 30px;
@@ -84,4 +84,8 @@ body {
 .conten{
     display: flex;
     
+}
+
+#header{
+    display: flex;
 }

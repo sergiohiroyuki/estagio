@@ -9,20 +9,32 @@
     <link rel="stylesheet" href="/static/algoritmo.css">
 </head>
 
-<body class="back_ground">
-    <div>
-        <a href="/logout">logout</a>
-    </div>
+<body>
+
+    <header id="header">
+        <nav id="nav">
+            
+            <a href="/logout">logout</a>
+            <a href="/historico_usuario">historico</a>
+            
+
+        </nav>
+    </header>
+    
+
 
     <div class="content">
 
 
-        <div class="drop_box">
-            <div>
-                <h1>
+        <div id="posicao">
+            <div class="drop_box">
+                <div>
+                    <h1>
                     🌱 Cidades do Parana 🌱
-                </h1><br><br>
-                <form action="/inicial" method="POST">
+                    </h1><br>
+                </div>
+                <div>
+                    <form action="/inicial" method="POST">
                     <label for="select_city">Selecione uma cidade:</label>
                     <select id="select_city" name="cidade" class="js-select2">
                         <option value="">Escolha uma cidade</option>
@@ -33,6 +45,7 @@
                     <br><br>
                     <input type="submit" id="submit_button" disabled class="butao">
                 </form>
+                </div>
             </div>
         </div>
 

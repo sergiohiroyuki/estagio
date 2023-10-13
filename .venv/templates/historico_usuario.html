@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historico do Usuario</title>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="/logout">Sair</a>
+            <a href="/inicial">Algoritmo</a>
+        </nav>
+    </header>
+    <div>
+        <h2>Histórico do {{nome_usuario}}</h2>
+    </div>
+    
+    <div id="historico_usuario">
+        <section id="usuarios">
+            <table id="tabela" cellspacing="10">
+                <thead>
+                    <tr>
+                        <th>    ID  </th>
+                        <th>    Cultura    </th>
+                        <th>    data   </th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for historico in historico %}
+                        <tr>
+                            <td>    {{ historico['id'] }}   </td>
+                            <td>    {{ historico['nome'] }} </td>
+                            <td>    {{ historico['data_hora'] }}    </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </div>
+
+</body>
+</html>

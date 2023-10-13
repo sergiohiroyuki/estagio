@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Histórico Geral</title>
+</head>
+<body>
+    
+    <header>
+        <nav>
+            <a href="/logout">Sair</a>
+            <a href="/adm">Gerenciar Usuarios</a>
+        </nav>
+    </header>
+
+    <div id="historico_usuario">
+        <section id="usuarios">
+            <table id="tabela" cellspacing="10">
+                <thead>
+                    <tr>
+                        <th>    ID  </th>
+                        <th>    nome da cidade  </th>
+                        <th>    data   </th>
+                        <th>    ID usuario   </tg>
+                        <th>    nome usuario </th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for historico in historico %}
+                        <tr>
+                            <td>    {{ historico[0] }}   </td>
+                            <td>    {{ historico[1] }}   </td>
+                            <td>    {{ historico[2] }} </td>
+                            <td>    {{ historico[3] }}    </td>
+                            <td>    {{ historico[4] }}    </td>
+                        </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+        </section>
+    </div>
+</body>
+</html>

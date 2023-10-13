@@ -5,27 +5,37 @@
     <link rel="stylesheet" href="/static/cadastro.css">
     
 </head>
+
 <body>
+
+    <header>
+        <nav>
+            <a href="/historico_geral">historico_geral</a>
+            <a href="/logout">logout</a>
+        </nav>      
+    </header>
+        
+
     <div id="titulo">
         <h1>Lista de Usuários</h1>   
     </div>
     
     <div id="cadastrar_usuario">
         <div id="cadastrar">
-            <div>
-                cadastrar:
-            </div>
             <div id="formulario_cadastrar">
+                <h3>cadastrar</h3>
                 <form action="/adm/cadastrar" method="POST">
                     <label for="nome">  Nome</label>
                     <input type="text" id="nome" name="nome">
 
+                    <br>
+
                     <label for="email">Email</label>
-                    <input type="email" id="email" name="email">
+                    <input type="email" id="email" name="email"><br>
 
                     <label for="senha">Senha</label>
                     <input type="password" id="senha" name="senha">
-                    <input type="checkbox" id="mostrar" onclick="mostrarOcultarSenha_cadastrar()">
+                    <input type="checkbox" id="mostrar" onclick="mostrarOcultarSenha_cadastrar()"><br>
 
                     <label for="conformar_senha">Confirmar Senha</label>
                     <input type="password" id="confirmar_senha" name="confirmar_senha">
@@ -48,14 +58,15 @@
     <div id="tabela_usuarios">
         <section id="usuarios">
             <table id="tabela" cellspacing="10">
-                <thead>
+                <thead id="">
                     <tr>
                         <th>    ID  </th>
                         <th>    Nome    </th>
                         <th>    Email   </th>
                         <th>    Senha   </th>
-                        <th>    Ações   </th> 
                         <th>    ADM </th>
+                        <th>    Ações   </th>  
+
                     </tr>
                 </thead>
                 <tbody>
@@ -65,7 +76,7 @@
                             <td>    {{ usuario_final['nome'] }} </td>
                             <td>    {{ usuario_final['email'] }}    </td>
                             <th>    *** </th>
-                            <th>    {{usuario_final['adm']}}    </th>
+                            <th id="adm">    {{usuario_final['adm']}}    </th>
                             <td>
                                 <a href="/adm/{{usuario_final.id}}/atualiza">Atualizar</a>
                                 <a href="/adm/{{usuario_final.id}}">Deletar</a>

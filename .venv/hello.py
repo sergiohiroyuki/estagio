@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, Response, jsonify, redirect
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.sql import func
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
 import json
 from teste import Grafico_1
@@ -33,107 +34,144 @@ class Usuario(db.Model, UserMixin):
     email = db.Column(db.String(45), unique = True)
     senha = db.Column(db.String(45))
     adm = db.Column(db.Boolean, default= False)
+    historico = db.relationship('Historico')
 
     def __init__(self, nome, email, senha, adm):
         self.nome = nome
         self.email = email
         self.senha = senha
         self.adm = adm
-        
+
+class Historico(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement = True)
+    nome = db.Column(db.String(45))
+    data_hora = db.Column(db.DateTime(timezone=True), default = func.now())
+    id_usuario = db.Column(db.Integer, db.ForeignKey('usuario.id'))
+
+    def __init__(self, nome, id_usuario):
+        self.nome = nome   
+        self.id_usuario = id_usuario     
 
 # Rota para retornar todos os usuários
 @app.route("/adm", methods=["GET"])
+@login_required
 def selecionar_todos_usuarios():
-    usuarios_objetos = Usuario.query.all() 
-
-    return render_template("lista_usuarios.html", usuario_final = usuarios_objetos)
+    id_usuario = current_user.id
+    usuario = Usuario.query.get(id_usuario)
+    if(usuario.adm == True):
+        usuarios_objetos = Usuario.query.all() 
+        return render_template("lista_usuarios.html", usuario_final = usuarios_objetos)
+    return redirect("/inicial")
 
 
 #retorna um usuario
 @app.route("/adm/<id>", methods = ["GET"])
+@login_required
 def selecionar_um_usuario(id):
-    usuario_objeto = Usuario.query.get(id)
-
-    return render_template("lista_usuarios.html", usuario = usuario_objeto)
+    id_usuario = current_user.id
+    usuario = Usuario.query.get(id_usuario)
+    if(usuario.adm == True):
+        usuario_objeto = Usuario.query.get(id)
+        return render_template("lista_usuarios.html", usuario = usuario_objeto)
+    return redirect("/inicial")
 
 #Cadasta Usuario
 @app.route("/adm/cadastrar", methods = ["GET" , "POST"])
+@login_required
 def criar_usuario():
-    
+    id_usuario = current_user.id
+    usuario = Usuario.query.get(id_usuario)
+    if(usuario.adm == True):
 
-    if(request.method == 'POST'):
-        nome = request.form['nome']
-        email = request.form['email']
-        senha = request.form['senha']
-        confirmar_senha = request.form['confirmar_senha']
-        adm = 'adm_cadastrar' in request.form
-        nome = nome.strip()
-        email = email.strip()
-        senha = senha.strip()
+        if(request.method == 'POST'):
+            nome = request.form['nome']
+            email = request.form['email']
+            senha = request.form['senha']
+            confirmar_senha = request.form['confirmar_senha']
+            adm = 'adm_cadastrar' in request.form
+            nome = nome.strip()
+            email = email.strip()
+            senha = senha.strip()
 
-        if(senha == confirmar_senha):
-          try:
-              usuario_email = Usuario.query.filter_by(nome=nome).first()
-              if usuario_email:
-                  return redirect("/adm")
-              usuario_nome = Usuario.query.filter_by(email=email).first()
-              if usuario_nome:
-                  return redirect("/adm")
-              if(not nome):
-                  print("cadastrar nome")
-                  return redirect("/adm")
-              if(not email):
-                  print("cadastrar email")
-                  return redirect("/adm")
-              if(not senha):
-                  print("cadastrar senha")
-                  return redirect("/adm")
-              
-              usuario = Usuario(nome, email, senha, adm)
-              db.session.add(usuario)
-              db.session.commit()
-              return redirect("/adm")
-          except Exception as e:
-              print("Erro" , e)
-              return redirect("/adm")
-        return redirect("/adm")
+            if(senha == confirmar_senha):
+                try:
+                    usuario_email = Usuario.query.filter_by(nome=nome).first()
+                    if usuario_email:
+                        return redirect("/adm")
+                    usuario_nome = Usuario.query.filter_by(email=email).first()
+                    if usuario_nome:
+                        return redirect("/adm")
+                    if(not nome):
+                        print("cadastrar nome")
+                        return redirect("/adm")
+                    if(not email):
+                        print("cadastrar email")
+                        return redirect("/adm")
+                    if(not senha):
+                        print("cadastrar senha")
+                        return redirect("/adm")
+                    
+                    usuario = Usuario(nome, email, senha, adm)
+                    db.session.add(usuario)
+                    db.session.commit()
+                    return redirect("/adm")
+                except Exception as e:
+                    print("Erro" , e)
+                    return redirect("/adm")
+            return redirect("/adm")
+    return redirect("/inicial")
     
 #Atualiza usuario
 @app.route("/adm/<id>/atualizar", methods =["POST"])
+@login_required
 def atualiza_usuario(id):
-    usuario_objeto = Usuario.query.get(id)
-    print(usuario_objeto.nome)
+    id_usuario = current_user.id
+    usuario = Usuario.query.get(id_usuario)
+    if(usuario.adm == True):
+        usuario_objeto = Usuario.query.get(id)
+        print(usuario_objeto.nome)
 
-    usuario_objeto.nome = request.form['nome']
-    usuario_objeto.email = request.form['email']
-    usuario_objeto.senha = request.form['senha']
-    
-    if 'adm_alterar' in request.form:
-        usuario_objeto.adm = True
-    else:
-        usuario_objeto.adm = False
+        usuario_objeto.nome = request.form['nome']
+        usuario_objeto.email = request.form['email']
+        usuario_objeto.senha = request.form['senha']
+        
+        if 'adm_alterar' in request.form:
+            usuario_objeto.adm = True
+        else:
+            usuario_objeto.adm = False
 
-    db.session.commit()
-    return redirect('/adm')
+        db.session.commit()
+        return redirect('/adm')
+    return redirect("/inicial")
 
 
 @app.route("/adm/<id>/atualiza")
+@login_required
 def atualizar_usuario(id):
-    usuario_objeto = Usuario.query.get(id)
+    id_usuario = current_user.id
+    usuario = Usuario.query.get(id_usuario)
+    if(usuario.adm == True):
+        usuario_objeto = Usuario.query.get(id)
 
-    return render_template("lista_usuarios.html", usuario_atualiza = usuario_objeto, atualizar = True)
+        return render_template("lista_usuarios.html", usuario_atualiza = usuario_objeto, atualizar = True)
+    return redirect("/inicial")
 
 #Deletar usuario
 @app.route("/adm/<id>/deletar")
+@login_required
 def deleta_usuario(id):
-    usuario_objeto = Usuario.query.get(id)
-    try:
-        db.session.delete(usuario_objeto)
-        db.session.commit()
-        return redirect("/adm")
-    except Exception as e:
-        print("Erro", e)
-        return gera_response(400, "usuario", {}, "Erro ao deletar o usuario")
+    id_usuario = current_user.id
+    usuario = Usuario.query.get(id_usuario)
+    if(usuario.adm == True):
+        usuario_objeto = Usuario.query.get(id)
+        try:
+            db.session.delete(usuario_objeto)
+            db.session.commit()
+            return redirect("/adm")
+        except Exception as e:
+            print("Erro", e)
+            return gera_response(400, "usuario", {}, "Erro ao deletar o usuario")
+    return redirect("/inicial")
 
     
 
@@ -163,7 +201,10 @@ def login():
         if(usuario):
             if(senha == usuario.senha):
                 login_user(usuario)
-                return redirect("/inicial")
+                if(usuario.adm == True):
+                    return redirect("/adm")
+                else:
+                    return redirect("/inicial")
         return redirect("/login")
     return render_template("login.html")
 
@@ -274,8 +315,35 @@ def index():
     grafico = Grafico_1(select_city)
     imagem_do_grafico = grafico.grafico_plot()
 
+    id = current_user.id
+    historico = Historico(select_city, id)
+    db.session.add(historico)
+    db.session.commit()
+
     return render_template("Tela_inicial.html", cidades=cidades, select_city = imagem_do_grafico.to_html())
 
+
+
+
+@app.route('/historico_usuario', methods=["GET"])
+@login_required
+def historico_usuario():
+    id = current_user.id
+    nome_usuario = current_user.nome
+    historico = Historico.query.filter_by(id_usuario=id).all()
+
+    return render_template("historico_usuario.html", historico=historico, nome_usuario=nome_usuario)
+
+@app.route('/historico_geral', methods=['GET'])
+@login_required
+def historico_geral():
+    id_usuario = current_user.id
+    usuario = Usuario.query.get(id_usuario)
+    if(usuario.adm == True):
+        query = db.session.query(Historico.id , Historico.nome, Historico.data_hora, Usuario.id, Usuario.nome).join(Historico)
+        historico = query.all()
+        return render_template("historico_geral.html", historico=historico)
+    return redirect("/inicial")
 
 
 if __name__ == "__main__":
