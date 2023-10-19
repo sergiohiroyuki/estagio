@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% if grafico_de_linha %}
+        <div class="grafico" >
+            {{ grafico_de_linha | safe }}
+         </div>
+    {% endif %}
+
+    {% if grafico_de_barras %}
+        <div class="grafico" >
+            {{ grafico_de_barras | safe }}
+        </div>
+    {% endif %}  
+    
+    {% if tabela %}
+        <div class="grafico" >
+            {{ tabela | safe }}
+        </div>
+    {% endif %}  
+</body>
+</html>

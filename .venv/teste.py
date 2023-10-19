@@ -144,7 +144,7 @@ class Grafico_1():
         # Exibir o gráfico
         fig.show()
 
-        return fig
+        return df_grafico
 
         
 

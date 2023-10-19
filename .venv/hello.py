@@ -131,9 +131,24 @@ def atualiza_usuario(id):
         usuario_objeto = Usuario.query.get(id)
         print(usuario_objeto.nome)
 
-        usuario_objeto.nome = request.form['nome']
-        usuario_objeto.email = request.form['email']
-        usuario_objeto.senha = request.form['senha']
+        nome = request.form['nome']
+        email = request.form['email']
+        senha = request.form['senha']
+        nome = nome.strip()
+        email = email.strip()
+        senha = senha.strip()
+
+        if(not nome):
+            return redirect("/adm")
+        if(not email):
+            return redirect("/adm")
+        if(not senha):
+            return redirect("/adm")
+
+        usuario_objeto.nome = nome
+        usuario_objeto.email = email
+        usuario_objeto.senha = senha
+        
         
         if 'adm_alterar' in request.form:
             usuario_objeto.adm = True
@@ -170,24 +185,12 @@ def deleta_usuario(id):
             return redirect("/adm")
         except Exception as e:
             print("Erro", e)
-            return gera_response(400, "usuario", {}, "Erro ao deletar o usuario")
+            return redirect("/adm")
     return redirect("/inicial")
-
-    
-
-#Reposta padrão
-def gera_response(status, nome_do_conteudo, conteudo, mensagem = False):
-    body = {}
-    body[nome_do_conteudo] = conteudo
-
-    if(mensagem):
-        body["mensagem"] = mensagem
-    
-    return Response(json.dumps(body), status = status, mimetype="aplication/json")
 
 
 @app.route("/")
-def hello_world():
+def inicial():
     return render_template("home.html")
 
 
@@ -310,20 +313,34 @@ def index():
   "Vitorino", "Wenceslau Braz"]
     
     select_city = request.form.get('cidade')
-    #grafico = Grafico(select_city)
-    #imagem_do_grafico = grafico.grafico_plot() 
-    grafico = Grafico_1(select_city)
-    imagem_do_grafico = grafico.grafico_plot()
+
+    #grafico = Grafico_1(select_city)
+    #imagem_do_grafico = grafico.grafico_plot()
+    #fig = px.line(imagem_do_grafico, x='Ano', y=['Valores Previstos (Passado)', 'Valores Reais', 'Valores Previstos (Futuros)'],
+    #                  labels={'Ano': 'Ano', 'value': 'Produção de Soja'}, title=f'Produção de Soja - Nome da Cidade - {select_city}')
+
 
     id = current_user.id
     historico = Historico(select_city, id)
     db.session.add(historico)
     db.session.commit()
 
-    return render_template("Tela_inicial.html", cidades=cidades, select_city = imagem_do_grafico.to_html())
+    return redirect(f"/resultados/{select_city}")
 
+@app.route('/resultados/<select_city>')
+@login_required
+def resultados(select_city):
+    grafico = Grafico_1(select_city)
+    imagem_do_grafico = grafico.grafico_plot()
+    fig_linha = px.line(imagem_do_grafico, x='Ano', y=['Valores Previstos (Passado)', 'Valores Reais', 'Valores Previstos (Futuros)'],
+                      labels={'Ano': 'Ano', 'value': 'Produção de Soja'}, title=f'Produção de Soja - Nome da Cidade - {select_city}')
 
-
+    fig_barra = px.bar(imagem_do_grafico, x='Ano', y=['Valores Previstos (Passado)', 'Valores Reais', 'Valores Previstos (Futuros)'],
+             barmode='group', # Isso garante que as barras fiquem lado a lado
+             labels={'Ano': 'Ano', 'value': 'Produção de Soja'},
+             title=f'Produção de Soja - Nome da Cidade - {select_city}')
+    
+    return render_template("resultados.html", grafico_de_linha = fig_linha.to_html(), grafico_de_barras = fig_barra.to_html(), tabela = imagem_do_grafico.to_html())
 
 @app.route('/historico_usuario', methods=["GET"])
 @login_required

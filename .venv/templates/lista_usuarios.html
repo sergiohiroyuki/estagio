@@ -10,8 +10,8 @@
 
     <header>
         <nav>
-            <a href="/historico_geral">historico_geral</a>
-            <a href="/logout">logout</a>
+            <a href="/logout">Sair</a>
+            <a href="/historico_geral">Historico Geral</a>
         </nav>      
     </header>
         
@@ -22,29 +22,38 @@
     
     <div id="cadastrar_usuario">
         <div id="cadastrar">
+            
             <div id="formulario_cadastrar">
                 <h3>cadastrar</h3>
                 <form action="/adm/cadastrar" method="POST">
-                    <label for="nome">  Nome</label>
-                    <input type="text" id="nome" name="nome">
 
-                    <br>
+                    <div class="formulario">
+                        <label for="nome">  Nome</label>
+                        <input type="text" id="nome" name="nome">
+                    </div>
+                    
+                    <div class="formulario">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email">
+                    </div>
+                    
+                    <div class="formulario">
+                        <label for="senha">Senha</label>
+                        <input type="password" id="senha" name="senha">
+                        <input type="checkbox" id="mostrar" onclick="mostrarOcultarSenha_cadastrar()">
+                    </div>
+                    
+                    <div class="formulario">
+                        <label for="conformar_senha">Confirmar Senha</label>
+                        <input type="password" id="confirmar_senha" name="confirmar_senha">
+                        <input type="checkbox" id="mostrar" onclick="mostrarOcultarSenha_validar()">
+                    </div>
 
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email"><br>
-
-                    <label for="senha">Senha</label>
-                    <input type="password" id="senha" name="senha">
-                    <input type="checkbox" id="mostrar" onclick="mostrarOcultarSenha_cadastrar()"><br>
-
-                    <label for="conformar_senha">Confirmar Senha</label>
-                    <input type="password" id="confirmar_senha" name="confirmar_senha">
-                    <input type="checkbox" id="mostrar" onclick="mostrarOcultarSenha_validar()">
-
-                    <br>
-
-                    <label for="adm">Usuario sera adm</label>
-                    <input type="checkbox" id="adm_cadastrar" name="adm_cadastrar">
+                    <div class="formulario">
+                        <label for="adm">Usuario sera adm</label>
+                        <input type="checkbox" id="adm_cadastrar" name="adm_cadastrar">
+                    </div>
+                    
 
                     <input type="submit" value="submit" id="botao_cadastrar">
                 </form>

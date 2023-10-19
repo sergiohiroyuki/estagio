@@ -143,6 +143,19 @@ div#cadastrar_usuario div#cadastrar input{
     border-radius: 10%;
 }
 
+div#cadastrar_usuario div#cadastrar div#formulario_cadastrar h3{
+    display: flex;
+    justify-content: space-around;
+}
+
+form{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: baseline;
+}
+
+
 /*usuarios*/
 div#tabela_usuarios{
     display: flex;
