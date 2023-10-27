@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="br">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Usuários</title>
     <link rel="stylesheet" href="/static/cadastro.css">
     
@@ -8,10 +10,10 @@
 
 <body>
 
-    <header>
-        <nav>
-            <a href="/logout">Sair</a>
-            <a href="/historico_geral">Historico Geral</a>
+    <header class="header">
+        <nav class="nav">
+            <a href="/logout" class="logout">logout</a>
+            <a href="/historico_geral" class="historico">Historico Geral</a>
         </nav>      
     </header>
         
@@ -20,44 +22,42 @@
         <h1>Lista de Usuários</h1>   
     </div>
     
-    <div id="cadastrar_usuario">
-        <div id="cadastrar">
-            
-            <div id="formulario_cadastrar">
-                <h3>cadastrar</h3>
-                <form action="/adm/cadastrar" method="POST">
+    <div class="cadastrar_usuario">
+        <div class="cadastrar">
+            <h3>CADASTRAR</h3>
+            <br>
+            <form action="/adm/cadastrar" method="POST">
 
-                    <div class="formulario">
-                        <label for="nome">  Nome</label>
-                        <input type="text" id="nome" name="nome">
-                    </div>
-                    
-                    <div class="formulario">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email">
-                    </div>
-                    
-                    <div class="formulario">
-                        <label for="senha">Senha</label>
-                        <input type="password" id="senha" name="senha">
-                        <input type="checkbox" id="mostrar" onclick="mostrarOcultarSenha_cadastrar()">
-                    </div>
-                    
-                    <div class="formulario">
-                        <label for="conformar_senha">Confirmar Senha</label>
-                        <input type="password" id="confirmar_senha" name="confirmar_senha">
-                        <input type="checkbox" id="mostrar" onclick="mostrarOcultarSenha_validar()">
-                    </div>
+                <div class="formulario">
+                    <label for="nome">  Nome</label>
+                    <input type="text" id="nome" name="nome">
+                </div>
+                
+                <div class="formulario">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email">
+                </div>
+                
+                <div class="formulario">
+                    <label for="senha">Senha</label>
+                    <input type="password" id="senha" name="senha">
+                    <input type="checkbox" id="mostrar" onclick="mostrarOcultarSenha_cadastrar()">
+                </div>
+                
+                <div class="formulario">
+                    <label for="conformar_senha">Confirmar Senha</label>
+                    <input type="password" id="confirmar_senha" name="confirmar_senha">
+                    <input type="checkbox" id="mostrar" onclick="mostrarOcultarSenha_validar()">
+                </div>
 
-                    <div class="formulario">
-                        <label for="adm">Usuario sera adm</label>
-                        <input type="checkbox" id="adm_cadastrar" name="adm_cadastrar">
-                    </div>
-                    
+                <div class="formulario">
+                    <label for="adm">Usuario sera adm</label>
+                    <input type="checkbox" id="adm_cadastrar" name="adm_cadastrar">
+                </div>
+                
 
-                    <input type="submit" value="submit" id="botao_cadastrar">
-                </form>
-            </div>
+                <input type="submit" value="submit" id="botao_cadastrar">
+            </form>
         </div>
     </div>
     
@@ -87,8 +87,8 @@
                             <th>    *** </th>
                             <th id="adm">    {{usuario_final['adm']}}    </th>
                             <td>
-                                <a href="/adm/{{usuario_final.id}}/atualiza">Atualizar</a>
-                                <a href="/adm/{{usuario_final.id}}">Deletar</a>
+                                <a href="/adm/{{usuario_final.id}}/atualiza" class="atualizar">Atualizar</a>
+                                <a href="/adm/{{usuario_final.id}}" class="deletar">Deletar</a>
                             </td>
                         </tr>
                     {% endfor %}

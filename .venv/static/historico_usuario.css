@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body{
+    font-family: 'Poppins';
+}
+
+/*nav bar*/
+.header{
+    display: flex;
+    background-color: black;
+    padding: 1%;
+    justify-content: flex-end;
+    font-family: 'Poppins';
+}
+
+.nav{
+    width: 15%;
+}
+
+.logout{
+    color: #FFFFFF;
+    text-decoration: none;
+    border: white solid 2px;
+    border-radius: 10px;
+    padding: 1%;
+}
+.logout:hover{
+    color: white;
+    background-color: red;
+    text-decoration: none;
+    border: red solid;
+    border-radius: 10px;
+}
+
+.algoritmo{
+    color: #FFFFFF;
+    text-decoration: none;
+    border: #FFFFFF solid 2px;
+    border-radius: 10px;
+    padding: 1%;
+}
+
+.algoritmo:hover{
+    color: white;
+    background-color: rgb(7, 173, 40);
+    text-decoration: none;
+    border: rgb(7, 173, 40) solid;
+    border-radius: 10px;
+}
+
+
+
+#tabela{
+    border: solid 1px;
+    border-radius: 5px;
+    text-align: center; 
+    padding: 1px;
+    width: 50%;
+}
+
+.id_usuario{
+    border: solid 1px;
+    border-radius: 5px;
+    text-align: center; 
+    padding: 1px;
+    width: 0.5%;
+}
+
+.info_usuario{
+    border: solid 1px;
+    border-radius: 5px;
+    text-align: center; 
+    padding: 1px;
+    width: 5%;
+}
+
+.historico_usuario{
+    display: flex;
+    justify-content: center;
+    padding: 5%;
+}
+
+.titulo{
+    display: flex;
+    justify-content: center;
+    padding-top: 5%;
+}

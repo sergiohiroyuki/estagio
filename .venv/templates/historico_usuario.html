@@ -4,41 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Historico do Usuario</title>
+    <link rel="stylesheet" href="/static/historico_usuario.css">
 </head>
 <body>
 
-    <header>
-        <nav>
-            <a href="/logout">Sair</a>
-            <a href="/inicial">Algoritmo</a>
+    <header class="header">
+        <nav class="nav">
+            <a href="/logout" class="logout">Logout</a>
+            <a href="/inicial" class="algoritmo">Algoritmo</a>
         </nav>
     </header>
-    <div>
+
+    <div class="titulo">
         <h2>Histórico do {{nome_usuario}}</h2>
     </div>
     
-    <div id="historico_usuario">
-        <section id="usuarios">
+    <div class="historico_usuario">
             <table id="tabela" cellspacing="10">
                 <thead>
                     <tr>
-                        <th>    ID  </th>
-                        <th>    Cultura    </th>
-                        <th>    data   </th>
+                        <th class="id_usuario">    ID  </th>
+                        <th class="info_usuario">    Cultura    </th>
+                        <th class="info_usuario">    Data   </th>
 
                     </tr>
                 </thead>
                 <tbody>
                     {% for historico in historico %}
                         <tr>
-                            <td>    {{ historico['id'] }}   </td>
-                            <td>    {{ historico['nome'] }} </td>
-                            <td>    {{ historico['data_hora'] }}    </td>
+                            <th class="id_usuario">    {{ historico['id'] }}   </th>
+                            <td class="info_usuario">    {{ historico['nome'] }} </td>
+                            <td class="info_usuario">    {{ historico['data_hora'] }}    </td>
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
-        </section>
     </div>
 
 </body>

@@ -25,6 +25,7 @@ body {
 #posicao{
     display: flex;
     justify-content: center;
+    margin-top: 25vh;
 }
 
 .drop_box {
@@ -86,6 +87,44 @@ body {
     
 }
 
-#header{
+.header{
     display: flex;
+    background-color: black;
+    padding: 1%;
+    justify-content: flex-end;
+}
+
+.nav{
+    width: 15%;
+}
+
+.logout{
+    color: #FFFFFF;
+    text-decoration: none;
+    border: white solid 2px;
+    border-radius: 10px;
+    padding: 1%;
+}
+.logout:hover{
+    color: white;
+    background-color: red;
+    text-decoration: none;
+    border: red solid;
+    border-radius: 10px;
+}
+
+.historico{
+    color: #FFFFFF;
+    text-decoration: none;
+    border: #FFFFFF solid 2px;
+    border-radius: 10px;
+    padding: 1%;
+}
+
+.historico:hover{
+    color: white;
+    background-color: rgb(7, 173, 40);
+    text-decoration: none;
+    border: rgb(7, 173, 40) solid;
+    border-radius: 10px;
 }

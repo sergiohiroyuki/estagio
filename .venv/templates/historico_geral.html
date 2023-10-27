@@ -4,19 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Histórico Geral</title>
+    <link rel="stylesheet" href="/static/historico_geral.css">
 </head>
 <body>
     
-    <header>
-        <nav>
-            <a href="/logout">Sair</a>
-            <a href="/adm">Gerenciar Usuarios</a>
+    <header class="header">
+        <nav class="nav">
+            <a href="/logout" class="logout">Logout</a>
+            <a href="/adm" class="pagina_usuarios">Gerenciar Usuarios</a>
         </nav>
     </header>
 
-    <div id="historico_usuario">
-        <section id="usuarios">
-            <table id="tabela" cellspacing="10">
+    <div class="historico_usuario">
+        <section class="usuarios">
+            <table class="tabela" cellspacing="10">
                 <thead>
                     <tr>
                         <th>    ID  </th>
@@ -42,5 +43,6 @@
             </table>
         </section>
     </div>
+    
 </body>
 </html>

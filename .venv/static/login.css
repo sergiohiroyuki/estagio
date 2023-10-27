@@ -1,0 +1,36 @@
+/*====================== GOOGLE FONTS ===================*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+
+body, html{
+    font-family: 'Poppins';
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.forms{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border: solid;
+    border-radius: 15px;
+    padding: 2%;
+    width: 35vh;
+    height: 30vh;
+}
+
+.formulario{
+    display: flex;
+    justify-content: center;
+}
+
+.input{
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.submit{
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
