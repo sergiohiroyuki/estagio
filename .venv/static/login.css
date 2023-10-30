@@ -2,35 +2,99 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
 
-body, html{
+*{
     font-family: 'Poppins';
     margin: 0;
     padding: 0;
     border: 0;
 }
 
-.forms{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    border: solid;
-    border-radius: 15px;
-    padding: 2%;
-    width: 35vh;
-    height: 30vh;
+body{
+    background-image: url("../static/img/soja.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+
+}
+
+html{
+    scroll-behavior: smooth;
 }
 
 .formulario{
     display: flex;
     justify-content: center;
+    width: 100%;
+    margin-top: 15%;
+}
+
+.forms{
+    border: solid;
+    border-radius: 15px;
+    padding: 2%;
+    box-shadow: 3px 3px 1px 0px #00000070;
+    background-color: aliceblue;
+}
+
+h2{
+    text-align: center;
 }
 
 .input{
+    position: relative;
+    padding-top: 15%;
     margin-top: 5%;
     margin-bottom: 5%;
+}
+
+.input input{
+    width: 100%;
+    padding: 5px 5px;
+    display: inline-block;
+    border: none;
+    border-bottom: 2px solid rgb(73, 73, 73);
+    background-color: transparent;
+    outline: none;
+    min-width: 180px;
+    font-size: 16px;
+    transition: .3s ease-out;
+}
+
+.input label{
+    position: absolute;
+    color: rgb(73, 73, 73);
+    pointer-events: none;
+    top: 40%;
+    left: 0;
+    margin-top: 16px;
+    transition: .3s ease-out;
+}
+
+.input input:focus + label {
+    top: 5px;
+    left: 0;
+    font-size: 10px;
+    margin-top: 0;
+    color: black;
 }
 
 .submit{
     margin-top: 5%;
     margin-bottom: 5%;
+}
+
+input[type="submit"]{
+    background-color: rgb(89, 255, 43);
+    padding:1%;
+    border: solid 1px black;
+    border-radius: 8px;
+    box-shadow: 3px 3px 1px 0px #00000070;
+}
+
+#ver_senha{
+    position: absolute;
+    right: 0;
+    top: 35%;
+    opacity: 75%;
 }

@@ -2,7 +2,6 @@ from flask import Flask, render_template, request, Response, jsonify, redirect
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import func
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
-import json
 from teste import Grafico_1
 import plotly.express as px
 import plotly.graph_objects as go
@@ -330,6 +329,8 @@ def index():
 @app.route('/resultados/<select_city>')
 @login_required
 def resultados(select_city):
+    id_usuario = current_user.id
+    usuario = Usuario.query.get(id_usuario)
     grafico = Grafico_1(select_city)
     imagem_do_grafico = grafico.grafico_plot()
     fig_linha = px.line(imagem_do_grafico, x='Ano', y=['Valores Previstos (Passado)', 'Valores Reais', 'Valores Previstos (Futuros)'],
@@ -340,7 +341,7 @@ def resultados(select_city):
              labels={'Ano': 'Ano', 'value': 'Produção de Soja'},
              title=f'Produção de Soja - Nome da Cidade - {select_city}')
     
-    return render_template("resultados.html", grafico_de_linha = fig_linha.to_html(), grafico_de_barras = fig_barra.to_html(), tabela = imagem_do_grafico.to_html())
+    return render_template("resultados.html", usuario = usuario, grafico_de_linha = fig_linha.to_html(), grafico_de_barras = fig_barra.to_html(), tabela = imagem_do_grafico.to_html())
 
 @app.route('/historico_usuario', methods=["GET"])
 @login_required
@@ -361,6 +362,24 @@ def historico_geral():
         historico = query.all()
         return render_template("historico_geral.html", historico=historico)
     return redirect("/inicial")
+
+
+@app.route('/historico_geral/<id>', methods = ["GET" , "POST"])
+@login_required
+def garfico_historico_geral(id):
+    id_historico = Historico.query.get(id)
+    select_city = id_historico.nome
+
+    return redirect(f"/resultados/{select_city}")
+
+@app.route('/historico_usuario/<id>', methods = ["GET" , "POST"])
+@login_required
+def garfico_historico_usuario(id):
+    id_historico = Historico.query.get(id)
+    select_city = id_historico.nome
+
+    return redirect(f"/resultados/{select_city}")
+
 
 
 if __name__ == "__main__":

@@ -1,6 +1,5 @@
 import numpy as np
 import pandas as pd
-import os
 import plotly.express as px
 import lightgbm as lgb
 from sklearn.model_selection import train_test_split
@@ -142,7 +141,7 @@ class Grafico_1():
 
 
         # Exibir o gráfico
-        fig.show()
+        #fig.show()
 
         return df_grafico
 

@@ -11,7 +11,11 @@
     <header class="header">
         <nav class="nav">
             <a href="/logout" class="logout">Logout</a>
+            {% if usuario.adm == True %}
+            <a href="/historico_geral" class="algoritmo">Historico</a>
+            {% else %}
             <a href="/inicial" class="algoritmo">Algoritmo</a>
+            {% endif %}
         </nav>
     </header>
 

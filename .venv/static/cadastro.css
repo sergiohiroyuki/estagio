@@ -123,37 +123,89 @@ section.modal div#card div#botoes a#cancelar:hover{
 
 
 /*tiutlo*/
-div#titulo{
-    display: flex;
-    justify-content: space-around;
-    top: 0;
-    font-family:'Poppins';
-    color: black;
-    margin: 0%;
-    padding: 1%;
-}
-
-/*cadastrarusuario*/
 .cadastrar_usuario{
     display: flex;
     justify-content: center;
+    width: 100%;
+    margin-top: 15%;
 }
+
 .cadastrar{
     border: solid;
     border-radius: 15px;
-    background-color: rgba(255,255,255,0.7);
-    padding: 4%;
-}
-
-.formulario{
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
+    padding: 2%;
+    box-shadow: 3px 3px 1px 0px #00000070;
+    background-color: aliceblue;
+    width: 25%;
 }
 
 h3{
-    display: flex;
-    justify-content: center;
+    text-align: center;
+}
+
+.formulario{
+    position: relative;
+    padding-top: 15%;
+}
+
+.formulario input{
+    width: 100%;
+    padding: 5px 5px;
+    display: inline-block;
+    border: none;
+    border-bottom: 2px solid rgb(73, 73, 73);
+    background-color: transparent;
+    outline: none;
+    min-width: 180px;
+    font-size: 16px;
+    transition: .3s ease-out;
+}
+
+.formulario label{
+    position: absolute;
+    color: rgb(73, 73, 73);
+    pointer-events: none;
+    top: 40%;
+    left: 0;
+    margin-top: 16px;
+    transition: .3s ease-out;
+}
+
+.formulario input:focus + label {
+    top: 5px;
+    left: 0;
+    font-size: 10px;
+    margin-top: 0;
+    color: black;
+}
+
+.submit{
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+input[type="submit"]{
+    background-color: rgb(89, 255, 43);
+    padding:1%;
+    border: solid 1px black;
+    border-radius: 8px;
+    box-shadow: 3px 3px 1px 0px #00000070;
+}
+
+#ver_senha{
+    position: absolute;
+    right: 0;
+    top: 35%;
+    opacity: 75%;
+    border: none;
+}
+
+#ver_senha_confirmar{
+    position: absolute;
+    right: 0;
+    top: 35%;
+    opacity: 75%;
+    border: none;
 }
 
 

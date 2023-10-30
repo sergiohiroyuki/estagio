@@ -96,3 +96,20 @@ body{
     justify-content: center;
     padding-top: 5%;
 }
+
+.visualizar{
+    background-color: rgb(81, 81, 236);
+    color: white;
+    text-decoration: none;
+    border: solid 2px black;
+    border-radius: 10px;
+    padding: 1%;
+}
+
+.visualizar:hover{
+    color: black;
+    text-decoration: none;
+    border: solid 2px rgb(81, 81, 236);
+    border-radius: 10px;
+    padding: 1%;
+}

@@ -15,33 +15,35 @@
         </nav>
     </header>
 
-    <div class="historico_usuario">
-        <section class="usuarios">
-            <table class="tabela" cellspacing="10">
-                <thead>
+    <div class="historico_geral">
+        <table class="tabela" cellspacing="10">
+            <thead>
+                <tr>
+                    <th class="id_usuario">    ID  </th>
+                    <th class="info_usuario">    nome da cidade  </th>
+                    <th class="info_usuario">    data   </th>
+                    <th class="id_usuario">    ID usuario   </tg>
+                    <th class="info_usuario">    nome usuario </th>
+                    <th class="info_usuario">   Ação    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for historico in historico %}
                     <tr>
-                        <th>    ID  </th>
-                        <th>    nome da cidade  </th>
-                        <th>    data   </th>
-                        <th>    ID usuario   </tg>
-                        <th>    nome usuario </th>
-
+                        <td class="id_usuario">    {{ historico[0] }}   </td>
+                        <td class="info_usuario">    {{ historico[1] }}   </td>
+                        <td class="info_usuario">    {{ historico[2] }} </td>
+                        <td class="id_usuario">    {{ historico[3] }}    </td>
+                        <td class="info_usuario">    {{ historico[4] }}    </td>
+                        <td>
+                            <a href="/historico_geral/{{historico.id}}" class="visualizar">Visualizar</a>
+                        </td>
                     </tr>
-                </thead>
-                <tbody>
-                    {% for historico in historico %}
-                        <tr>
-                            <td>    {{ historico[0] }}   </td>
-                            <td>    {{ historico[1] }}   </td>
-                            <td>    {{ historico[2] }} </td>
-                            <td>    {{ historico[3] }}    </td>
-                            <td>    {{ historico[4] }}    </td>
-                        </tr>
-                    {% endfor %}
+                {% endfor %}
 
-                </tbody>
-            </table>
-        </section>
+            </tbody>
+        </table>
     </div>
     
 </body>

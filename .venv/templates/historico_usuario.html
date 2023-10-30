@@ -26,6 +26,7 @@
                         <th class="id_usuario">    ID  </th>
                         <th class="info_usuario">    Cultura    </th>
                         <th class="info_usuario">    Data   </th>
+                        <th class="info_usuario">    Ações   </th>
 
                     </tr>
                 </thead>
@@ -35,6 +36,9 @@
                             <th class="id_usuario">    {{ historico['id'] }}   </th>
                             <td class="info_usuario">    {{ historico['nome'] }} </td>
                             <td class="info_usuario">    {{ historico['data_hora'] }}    </td>
+                            <td>
+                                <a href="/historico_usuario/{{id}}" class="visualizar">Visualizar</a>
+                            </td>
                         </tr>
                     {% endfor %}
                 </tbody>
