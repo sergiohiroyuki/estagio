@@ -18,52 +18,54 @@
     </header>
         
 
-    <div id="titulo">
-        <h1>Lista de Usuários</h1>   
+    <div class="titulo">
+        <h1>Cadastrar Usuário</h1>   
     </div>
     
     <div class="cadastrar_usuario">
         <div class="cadastrar">
-            <h3>CADASTRAR</h3>
+            <h2>CADASTRAR</h2>
             <br>
             <form action="/adm/cadastrar" method="POST">
 
                 <div class="formulario">
-                    <input type="text" id="nome" name="nome">
+                    <input type="text" id="nome" name="nome" placeholder=" ">
                     <label for="nome">  Nome</label>
                 </div>
                 
                 <div class="formulario">
-                    <input type="email" id="email" name="email">
+                    <input type="email" id="email" name="email" placeholder=" ">
                     <label for="email">Email</label>
                 </div>
                 
                 <div class="formulario">
                     <button type="button" id="ver_senha" onclick="mostrarOcultarSenha()"><img src="../static/img/n_ve.png"></button>
-                    <input type="password" id="senha" name="senha">
+                    <input type="password" id="senha" name="senha" placeholder=" ">
                     <label for="senha">Senha</label>
                 </div>
                 
                 <div class="formulario">
                     <button type="button" id="ver_senha_confirmar" onclick="mostrarOcultarSenha_validar()"><img src="../static/img/n_ve.png"></button>
-                    <input type="password" id="confirmar_senha" name="confirmar_senha">
+                    <input type="password" id="confirmar_senha" name="confirmar_senha" placeholder=" ">
                     <label for="confirmar_senha">Confirmar Senha</label>
                 </div>
 
-                <div class="formulario">
+                <div id="checkbox">
                     <label for="adm">Usuario sera adm</label>
                     <input type="checkbox" id="adm_cadastrar" name="adm_cadastrar">
                 </div>
                 
 
-                <input type="submit" value="submit" id="botao_cadastrar">
+                <input type="submit" value="Cadastrar" id="botao_cadastrar">
             </form>
         </div>
     </div>
     
 
-    <br>
-    
+    <div class="titulo">
+        <h1>Lista de Usuários</h1>   
+    </div>
+
     <div id="tabela_usuarios">
         <section id="usuarios">
             <table id="tabela" cellspacing="10">
@@ -121,33 +123,35 @@
 
     {% if usuario_atualiza != undefined %}
        
-        <section class="modal">
-            <div id="card">
+        <section class="modal_atualiza">
+            <div class="card">
 
-                <a href="/adm" id="fechar">x</a>
+                <a href="/adm" class="fechar">x</a>
 
                 <h2>Atualizando usuário {{usuario_atualiza.nome}}</h2>
                 <form action="/adm/{{usuario_atualiza.id}}/atualizar" method="POST">
-                    <div>
-                        <label for="nome">Nome</label>
-                        <input type="text" id="nome" name="nome" value="{{usuario_atualiza.nome}}">  
+                    <div class="formulario_atualizar">
+                        <input type="text" id="nome" name="nome" value="{{usuario_atualiza.nome}}">
+                        <label for="nome">Nome:</label>  
                     </div>
-                    <div>
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" value="{{usuario_atualiza.email}}">  
+                    <div class="formulario_atualizar">
+                        <input type="email" id="email" name="email" value="{{usuario_atualiza.email}}">
+                        <label for="email">Email:</label>  
                     </div>
-                    <div>
-                        <label for="senha">Senha</label>
-                        <input type="password" id="senha_form" name="senha" value="{{usuario_atualiza.senha}}"> 
-                        <input type="checkbox" id="mostrar" onclick="mostrarOcultarSenha()">
+                    <div class="formulario_atualizar">
+                        <button type="button" id="ver_senha_atualiza" onclick="mostrarOcultarSenhaAtualiza()">
+                            <img src="\static\img\n_ve.png">
+                        </button>
+                        <input type="password" id="senha_form" name="senha" value="{{usuario_atualiza.senha}}">
+                        <label for="senha">Senha:</label> 
                     </div>
-                    <div>
+                    <div class="checkbox_adm">
                         <label for="adm">Modificar permição</label>
                         <input type="checkbox" id="adm_alterar" name="adm_alterar">
                     </div>
                     <div>
-                        <input type="submit" value="Atualizar">
-                        <a href="/adm" id="cancelar">Cancelar</a>
+                        <input type="submit" value="Atualizar" class="input_atualizar">
+                        <a href="/adm" class="cancelar">Cancelar</a>
                     </div>
                 </form>
 
@@ -157,18 +161,20 @@
 {% endif %}
 
 <script>
-    function mostrarOcultarSenha() {
+    function mostrarOcultarSenhaAtualiza() {
         var senha = document.getElementById('senha_form');
-        var senha_cadastrar = document.getElementById('senha');
-        var senha_validar = document.getElementById('confirmar_senha');
-        console.log(senha.type)
+        var botao = document.getElementById('ver_senha_atualiza');
+        var imagem = botao.querySelector('img');
+        console.log(senha.type);
 
-        console.log('Função mostrarOcultarSenha foi chamada.'); // Adicione esta linha para depuração
+        console.log('Função mostrarOcultarSenhaAtualiza foi chamada.'); // Adicione esta linha para depuração
 
         if (senha.type === 'password') {
-            senha.setAttribute('type','text');
+            senha.setAttribute('type', 'text');
+            imagem.setAttribute('src', '/static/img/ve.png');
         } else {
             senha.type = 'password';
+            imagem.setAttribute('src', '/static/img/n_ve.png'); 
         }
     }
 </script>

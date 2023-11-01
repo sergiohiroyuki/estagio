@@ -20,6 +20,13 @@ body{
     font-family: 'Poppins';
 }
 
+.titulo{
+    display: flex;
+    justify-content: center;
+    margin-top: 1%;
+    font-family: 'Poppins';
+}
+
 section.modal{
     position: fixed;
     top: 0;
@@ -127,7 +134,7 @@ section.modal div#card div#botoes a#cancelar:hover{
     display: flex;
     justify-content: center;
     width: 100%;
-    margin-top: 15%;
+    margin-top: none;
 }
 
 .cadastrar{
@@ -135,11 +142,11 @@ section.modal div#card div#botoes a#cancelar:hover{
     border-radius: 15px;
     padding: 2%;
     box-shadow: 3px 3px 1px 0px #00000070;
-    background-color: aliceblue;
+    background-color: rgb(240, 248, 255);
     width: 25%;
 }
 
-h3{
+h2{
     text-align: center;
 }
 
@@ -170,13 +177,26 @@ h3{
     margin-top: 16px;
     transition: .3s ease-out;
 }
-
+/*
 .formulario input:focus + label {
-    top: 5px;
+    top: 20%;
     left: 0;
     font-size: 10px;
     margin-top: 0;
     color: black;
+}
+*/
+
+.formulario input:not(:placeholder-shown) + label,
+.formulario input:focus + label {
+    top: 20px;
+    font-size: 12px;
+    left: 0;
+    color: black;
+}
+
+.formulario input:focus + label {
+    top: -20px;
 }
 
 .submit{
@@ -185,11 +205,17 @@ h3{
 }
 
 input[type="submit"]{
+    font-size: 16px;
     background-color: rgb(89, 255, 43);
     padding:1%;
-    border: solid 1px black;
+    border: solid 2px black;
     border-radius: 8px;
-    box-shadow: 3px 3px 1px 0px #00000070;
+    box-shadow: 2.5px 2.5px 2px 0px #00000070;
+    cursor: pointer;
+}
+
+input[type="checkbox"]{
+    cursor: pointer;
 }
 
 #ver_senha{
@@ -198,6 +224,8 @@ input[type="submit"]{
     top: 35%;
     opacity: 75%;
     border: none;
+    cursor: pointer;
+    background: none;
 }
 
 #ver_senha_confirmar{
@@ -206,8 +234,9 @@ input[type="submit"]{
     top: 35%;
     opacity: 75%;
     border: none;
+    cursor: pointer;
+    background: none;
 }
-
 
 /*usuarios*/
 div#tabela_usuarios{
@@ -304,3 +333,153 @@ div#tabela_usuarios section#usuario table#tabela{
     border-radius: 10px;
 }
 
+
+/*atualizar usuario*/
+section.modal_atualiza{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.738);
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: auto;
+}
+
+.card{
+    width: 28rem;
+    height: 28rem;
+    position: relative;
+    background-color: aliceblue;
+    border-radius: 5%;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+}
+
+.fechar{
+    align-items: center;
+    text-align: center;
+    position: absolute;
+    right: 2%;
+    top: 1%;
+    width: 5%;
+    font-size: large;
+    text-decoration: none;
+    color: rgb(0, 42, 255);
+    border-radius: 10%;
+    display: flex;
+    justify-content: center;
+}
+
+.fechar:hover{
+    align-items: center;
+    text-align: center;
+    position: absolute;
+    right: 2%;
+    top: 1%;
+    font-size: x-large;
+    text-decoration: none;
+    background-color: red;
+    color: white;
+    height: 5%;
+}
+
+.cancelar{
+    margin-top: 5%;
+    text-decoration: none;
+    background-color: white;
+    border: solid 2px;
+    border-radius: 7px;
+    border-color: red;
+    color: black;
+    padding: 1%;
+}
+
+.cancelar:hover{
+    background-color: red;
+    border: solid 2px;
+    border-radius: 7px;
+    border-color: red;
+    color: white;
+    padding: 1%;
+}
+
+.card .input_atualizar{
+    margin-top: 5%;
+    text-decoration: none;
+    background-color: white;
+    border: solid 2px;
+    border-radius: 7px;
+    border-color: rgb(19, 73, 221);
+    color: black;
+    padding: 1%;
+    font-size: 18px;
+    box-shadow: none;
+}
+
+.card .input_atualizar:hover{
+    background-color: rgb(19, 73, 221);
+    border: solid 2px;
+    border-radius: 7px;
+    border-color: rgb(19, 73, 221);
+    color: white;
+    padding: 1%;
+}
+
+.formulario_atualizar{
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: baseline;
+    gap: 10%;
+    padding: 5%;
+}
+
+.formulario_atualizar input{
+    width: 100%;
+    padding: 5% 5% 0% 0%;
+    display: inline-block;
+    border: none;
+    border-bottom: 2px solid rgb(73, 73, 73);
+    background-color: transparent;
+    outline: none;
+    min-width: 180px;
+    font-size: 16px;
+    transition: .3s ease-out;
+}
+
+.formulario_atualizar input:focus + label{
+    top: 5px;
+    left: 0;
+    font-size: 20px;
+    margin-top: 0;
+    color: black;
+    color: black;
+}
+
+#ver_senha_atualiza{
+    position: absolute;
+    right: 20%;
+    top: 50%;
+    opacity: 75%;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.checkbox_adm{
+    display: flex;
+    justify-content: flex-start;
+    gap: 10%;
+    padding-top: 2.5% 2.5%;
+}
+
+#checkbox{
+    padding: 5% 0% 5% 0%;
+    color: rgb(73, 73, 73);
+}
