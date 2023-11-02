@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, Response, jsonify, redirect
+from flask import Flask, render_template, request, Response, jsonify, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import func
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
@@ -204,9 +204,12 @@ def login():
             if(senha == usuario.senha):
                 login_user(usuario)
                 if(usuario.adm == True):
+                    flash("Usuario logado com sucesso!!")
                     return redirect("/adm")
                 else:
+                    flash("Usuario logado com sucesso!!")
                     return redirect("/inicial")
+            flash("Verifique o Nome ou a Senha!!")
         return redirect("/login")
     return render_template("login.html")
 

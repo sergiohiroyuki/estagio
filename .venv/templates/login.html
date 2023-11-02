@@ -5,11 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/login.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="/static/flash_messages.css">
     <title>Login</title>
 </head>
 
 <body>
-            
+        
+    {% for message in get_flashed_messages() %}
+    <div class="erro">
+        <h3>{{message}}</h3>
+        <a href="/login">X</a>
+    </div>   
+    {% endfor %} 
+
         <div class="formulario">
           <div  class="forms">
             <h2>Login</h2>

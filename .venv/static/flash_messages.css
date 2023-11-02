@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+.erro{
+    display: flex;
+    justify-content: space-between;
+    text-decoration: none;
+    color:black;
+    text-align: center;
+    font-size: 18px;
+    font-family: 'Poppins';
+    padding: 1%;
+    margin-left: 3%;
+    margin-right: 3%;
+    margin-top: 1%;
+    background-color: rgb(255, 109, 24);
+}
+
+.erro a{
+    text-decoration: none;
+    color:black;
+    text-align: center;
+    font-size: 18px;
+    font-family: 'Poppins';
+}
+
+.erro a:hover{
+    text-decoration: none;
+    color: rgb(65, 65, 255);
+    text-align: center;
+    font-size: 18px;
+    font-family: 'Poppins';
+}
+
+.certo{
+    display: flex;
+    justify-content: space-between;
+    text-decoration: none;
+    color:black;
+    text-align: center;
+    font-size: 18px;
+    font-family: 'Poppins';
+    padding: 1%;
+    margin-left: 3%;
+    margin-right: 3%;
+    margin-top: 1%;
+    background-color: rgb(69, 255, 90);
+}
+
+.certo a{
+    text-decoration: none;
+    color:black;
+    text-align: center;
+    font-size: 18px;
+    font-family: 'Poppins';
+}
+
+.certo a:hover{
+    text-decoration: none;
+    color: rgb(65, 65, 255);
+    text-align: center;
+    font-size: 18px;
+    font-family: 'Poppins';
+}

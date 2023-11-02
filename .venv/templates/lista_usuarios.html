@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Usuários</title>
     <link rel="stylesheet" href="/static/cadastro.css">
-    
+    <link rel="stylesheet" href="/static/flash_messages.css">
 </head>
 
 <body>
@@ -16,6 +16,13 @@
             <a href="/historico_geral" class="historico">Historico Geral</a>
         </nav>      
     </header>
+
+    {% for message in get_flashed_messages() %}
+        <div class="certo">
+            <h3>{{message}}</h3>
+            <a href="/adm">X</a>
+        </div>   
+    {% endfor %} 
         
 
     <div class="titulo">
