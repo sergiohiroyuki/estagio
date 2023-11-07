@@ -5,6 +5,8 @@ from flask_login import UserMixin, login_user, LoginManager, login_required, log
 from teste import Grafico_1
 import plotly.express as px
 import plotly.graph_objects as go
+from flask_paginate import Pagination, get_page_args
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
 
@@ -31,7 +33,7 @@ class Usuario(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True, autoincrement = True)
     nome = db.Column(db.String(45), unique = True)
     email = db.Column(db.String(45), unique = True)
-    senha = db.Column(db.String(45))
+    senha = db.Column(db.String(228))
     adm = db.Column(db.Boolean, default= False)
     historico = db.relationship('Historico')
 
@@ -94,29 +96,45 @@ def criar_usuario():
 
             if(senha == confirmar_senha):
                 try:
-                    usuario_email = Usuario.query.filter_by(nome=nome).first()
+                    usuario_email = Usuario.query.filter_by(email=email).first()
                     if usuario_email:
-                        return redirect("/adm")
-                    usuario_nome = Usuario.query.filter_by(email=email).first()
-                    if usuario_nome:
-                        return redirect("/adm")
-                    if(not nome):
-                        print("cadastrar nome")
-                        return redirect("/adm")
-                    if(not email):
-                        print("cadastrar email")
-                        return redirect("/adm")
-                    if(not senha):
-                        print("cadastrar senha")
+                        flash("Email já Cadastrado", "error")
+                        app.logger.info("Email já Cadastrado")
                         return redirect("/adm")
                     
-                    usuario = Usuario(nome, email, senha, adm)
+                    usuario_nome = Usuario.query.filter_by(nome=nome).first()
+                    if usuario_nome:
+                        app.logger.info("Nome já Cadastrado")
+                        flash("Nome já Cadastrado" , "error")
+                        return redirect("/adm")
+                    
+                    if(not nome):
+                        print("vasio")
+                        flash("Campo Precisa Ser Prenchido", "error")
+                        return redirect("/adm")
+                    
+                    if(not email):
+                        print("vasio")
+                        flash("Campo Precisa Ser Prenchido", "error")
+                        return redirect("/adm")
+                    
+                    if(not senha):
+                        print("vasio")
+                        flash("Campo Precisa Ser Prenchido", "error")
+                        return redirect("/adm")
+                    
+                    senha_hash = generate_password_hash(senha)
+
+                    usuario = Usuario(nome, email, senha_hash, adm)
+                    app.logger.info("Usuario criado com sucesso")
+                    flash("Usuario Cadastrado com Sucesso!!", "success")
                     db.session.add(usuario)
                     db.session.commit()
                     return redirect("/adm")
                 except Exception as e:
                     print("Erro" , e)
                     return redirect("/adm")
+            flash("As Senhas Informadas são Diferentes", "error")    
             return redirect("/adm")
     return redirect("/inicial")
     
@@ -137,16 +155,51 @@ def atualiza_usuario(id):
         email = email.strip()
         senha = senha.strip()
 
+        usuario_email = Usuario.query.filter_by(email=email).first()
+        if(usuario_email):
+            usuario_validar_email = usuario_email.email 
+        else:
+             usuario_validar_email = "email não existe"
+             app.logger.info("email não encontrado!!!")  
+        if (usuario_validar_email == usuario_objeto.email):
+            app.logger.info("email Ok!!!")
+        elif usuario_email:
+            flash("Email já Cadastrado", "error")
+            app.logger.info("Email já Cadastrado")
+            return redirect("/adm")
+                            
+        usuario_nome = Usuario.query.filter_by(nome=nome).first()
+        if(usuario_nome):
+            usuario_validar_nome = usuario_nome.nome
+        else:
+             usuario_validar_nome = "nome não existe"
+             app.logger.info("nome não encontrado!!!") 
+        if (usuario_validar_nome == usuario_objeto.nome):
+            app.logger.info("nome Ok!!!!")
+        elif usuario_nome:
+            app.logger.info("Nome já Cadastrado")
+            flash("Nome já Cadastrado" , "error")
+            return redirect("/adm")
+        
+        
         if(not nome):
+            flash("Campo Precisa Ser Prenchido", "error")
             return redirect("/adm")
         if(not email):
+            flash("Campo Precisa Ser Prenchido", "error")
             return redirect("/adm")
-        if(not senha):
-            return redirect("/adm")
+
 
         usuario_objeto.nome = nome
         usuario_objeto.email = email
-        usuario_objeto.senha = senha
+        app.logger.info(senha)
+        app.logger.info(usuario_objeto.senha)
+        if(senha):
+            app.logger.info(senha)
+            app.logger.info(usuario_objeto.senha)
+            usuario_objeto.senha = generate_password_hash(senha)
+            app.logger.info(senha)
+            app.logger.info(usuario_objeto.senha)
         
         
         if 'adm_alterar' in request.form:
@@ -154,6 +207,7 @@ def atualiza_usuario(id):
         else:
             usuario_objeto.adm = False
 
+        flash("Usuario Atualizado com Sucesso!!", "success")
         db.session.commit()
         return redirect('/adm')
     return redirect("/inicial")
@@ -179,6 +233,7 @@ def deleta_usuario(id):
     if(usuario.adm == True):
         usuario_objeto = Usuario.query.get(id)
         try:
+            flash("Usuario Deletado com Sucesso!!", "success")
             db.session.delete(usuario_objeto)
             db.session.commit()
             return redirect("/adm")
@@ -201,15 +256,15 @@ def login():
         
         usuario = Usuario.query.filter_by(nome=nome).first()
         if(usuario):
-            if(senha == usuario.senha):
+            if(check_password_hash(usuario.senha, senha) ):
                 login_user(usuario)
                 if(usuario.adm == True):
-                    flash("Usuario logado com sucesso!!")
+                    flash("Usuario logado com sucesso!!" , "success")
                     return redirect("/adm")
                 else:
-                    flash("Usuario logado com sucesso!!")
+                    flash("Usuario logado com sucesso!!", "success")
                     return redirect("/inicial")
-            flash("Verifique o Nome ou a Senha!!")
+            flash("Verifique o Nome ou a Senha!!", "error")
         return redirect("/login")
     return render_template("login.html")
 
@@ -217,6 +272,7 @@ def login():
 @login_required
 def log_out():
     logout_user()
+    flash("Usuario Saiu da Aplicação com Sucesso!!", "success")
     return redirect("/login")
 
 @app.route("/inicial")
@@ -349,21 +405,30 @@ def resultados(select_city):
 @app.route('/historico_usuario', methods=["GET"])
 @login_required
 def historico_usuario():
+    page = request.args.get('page', type=int, default=1)
+    per_page = 10  # Defina o número de itens por página conforme necessário
     id = current_user.id
     nome_usuario = current_user.nome
-    historico = Historico.query.filter_by(id_usuario=id).all()
+
+    historico = Historico.query.filter_by(id_usuario=id).paginate(page=page, per_page=per_page, error_out=False)
 
     return render_template("historico_usuario.html", historico=historico, nome_usuario=nome_usuario)
 
 @app.route('/historico_geral', methods=['GET'])
 @login_required
 def historico_geral():
+    page = request.args.get('page', 1, type=int)  # Obtém o número da página da URL, padrão é 1
+    per_page = 10  # Número de registros por página
     id_usuario = current_user.id
     usuario = Usuario.query.get(id_usuario)
-    if(usuario.adm == True):
-        query = db.session.query(Historico.id , Historico.nome, Historico.data_hora, Usuario.id, Usuario.nome).join(Historico)
-        historico = query.all()
-        return render_template("historico_geral.html", historico=historico)
+    
+    if usuario.adm:
+        query = db.session.query(Historico.id, Historico.nome, Historico.data_hora, Usuario.id, Usuario.nome).join(Historico)
+        pagination = query.paginate(page=page, per_page=per_page, error_out=False)
+        historico = pagination.items
+        
+        return render_template("historico_geral.html", historico=historico, pagination=pagination)
+    
     return redirect("/inicial")
 
 

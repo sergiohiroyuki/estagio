@@ -66,6 +66,7 @@ section.modal div#card a#fechar{
     border-radius: 10%;
     display: flex;
     justify-content: center;
+    transition: .3s ease-out;
 }
 
 section.modal div#card a#fechar:hover{
@@ -109,6 +110,7 @@ section.modal div#card div#botoes a#confirmar{
     background-color: aliceblue;
     border-color: black;
     color: black;
+    transition: .3s ease-out;
 }
 section.modal div#card div#botoes a#confirmar:hover{
     background-color: black;
@@ -120,6 +122,7 @@ section.modal div#card div#botoes a#cancelar{
     background-color: white;
     border-color: red;
     color: black;
+    transition: .3s ease-out;
 }
 
 section.modal div#card div#botoes a#cancelar:hover{
@@ -141,7 +144,6 @@ section.modal div#card div#botoes a#cancelar:hover{
     border: solid;
     border-radius: 15px;
     padding: 2%;
-    box-shadow: 3px 3px 1px 0px #00000070;
     background-color: rgb(240, 248, 255);
     width: 25%;
 }
@@ -206,11 +208,20 @@ h2{
 
 input[type="submit"]{
     font-size: 16px;
-    background-color: rgb(89, 255, 43);
+    background-color: rgb(40, 186, 0);
     padding:1%;
     border: solid 2px black;
     border-radius: 8px;
-    box-shadow: 2.5px 2.5px 2px 0px #00000070;
+    cursor: pointer;
+    transition: .3s ease-out;
+}
+
+input[type="submit"]:hover{
+    font-size: 16px;
+    background-color: rgb(89, 255, 43);
+    padding:1%;
+    border: solid 2px rgb(89, 255, 43);
+    border-radius: 8px;
     cursor: pointer;
 }
 
@@ -263,6 +274,7 @@ div#tabela_usuarios section#usuario table#tabela{
     border: solid 2px;
     border-radius: 8px;
     padding: 2px;
+    transition: .3s ease-out;
 }
 .atualizar:hover{
     border: solid rgb(19, 73, 221) 2px;
@@ -278,6 +290,7 @@ div#tabela_usuarios section#usuario table#tabela{
     border: solid 2px;
     border-radius: 8px;
     padding: 2px;
+    transition: .3s ease-out;
 }
 
 .deletar:hover{
@@ -292,7 +305,9 @@ div#tabela_usuarios section#usuario table#tabela{
 /*nav bar*/
 .header{
     display: flex;
-    background-color: black;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     padding: 1%;
     justify-content: flex-end;
     font-family: 'Poppins';
@@ -308,6 +323,7 @@ div#tabela_usuarios section#usuario table#tabela{
     border: white solid 2px;
     border-radius: 10px;
     padding: 1%;
+    transition: .3s ease-out;
 }
 .logout:hover{
     color: white;
@@ -323,6 +339,7 @@ div#tabela_usuarios section#usuario table#tabela{
     border: #FFFFFF solid 2px;
     border-radius: 10px;
     padding: 1%;
+    transition: .3s ease-out;
 }
 
 .historico:hover{
@@ -375,6 +392,7 @@ section.modal_atualiza{
     border-radius: 10%;
     display: flex;
     justify-content: center;
+    transition: .3s ease-out;
 }
 
 .fechar:hover{
@@ -399,6 +417,7 @@ section.modal_atualiza{
     border-color: red;
     color: black;
     padding: 1%;
+    transition: .3s ease-out;
 }
 
 .cancelar:hover{
@@ -421,15 +440,20 @@ section.modal_atualiza{
     padding: 1%;
     font-size: 18px;
     box-shadow: none;
+    transition: .3s ease-out;
 }
 
 .card .input_atualizar:hover{
+    margin-top: 5%;
+    text-decoration: none;
     background-color: rgb(19, 73, 221);
     border: solid 2px;
     border-radius: 7px;
     border-color: rgb(19, 73, 221);
     color: white;
     padding: 1%;
+    font-size: 18px;
+    box-shadow: none;
 }
 
 .formulario_atualizar{

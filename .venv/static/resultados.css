@@ -12,13 +12,21 @@ html {
 }
 
 body{
+    margin: 0 0 var(--header-height) 0;
     font-family: 'Poppins';
+    background-image: url("../static/img/imagem_soja_3.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: relative;
 }
 
 /*nav bar*/
 .header{
     display: flex;
-    background-color: black;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     padding: 1%;
     justify-content: flex-end;
     font-family: 'Poppins';

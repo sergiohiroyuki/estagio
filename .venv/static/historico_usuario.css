@@ -12,13 +12,21 @@ html {
 }
 
 body{
+    margin: 0 0 var(--header-height) 0;
     font-family: 'Poppins';
+    background-image: url("../static/img/imagem_soja_2.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: relative;
 }
 
 /*nav bar*/
 .header{
     display: flex;
-    background-color: black;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     padding: 1%;
     justify-content: flex-end;
     font-family: 'Poppins';
@@ -34,6 +42,7 @@ body{
     border: white solid 2px;
     border-radius: 10px;
     padding: 1%;
+    transition: .3s ease-out;
 }
 .logout:hover{
     color: white;
@@ -49,6 +58,7 @@ body{
     border: #FFFFFF solid 2px;
     border-radius: 10px;
     padding: 1%;
+    transition: .3s ease-out;
 }
 
 .algoritmo:hover{
@@ -62,6 +72,9 @@ body{
 
 
 #tabela{
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border: solid 1px;
     border-radius: 5px;
     text-align: center; 
@@ -88,13 +101,13 @@ body{
 .historico_usuario{
     display: flex;
     justify-content: center;
-    padding: 5%;
+    padding: 1% 5% 1% 5%
 }
 
 .titulo{
     display: flex;
     justify-content: center;
-    padding-top: 5%;
+    padding-top: 3%;
 }
 
 .visualizar{
@@ -104,6 +117,7 @@ body{
     border: solid 2px black;
     border-radius: 10px;
     padding: 1%;
+    transition: .3s ease-out;
 }
 
 .visualizar:hover{
@@ -112,4 +126,35 @@ body{
     border: solid 2px rgb(81, 81, 236);
     border-radius: 10px;
     padding: 1%;
+}
+
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1%;
+}
+
+.pagination ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+}
+
+.pagination li {
+    margin: 0 5px;
+}
+
+.pagination a {
+    text-decoration: none;
+    padding: 5px 10px;
+    background-color: #007BFF;
+    color: #fff;
+    border-radius: 5px;
+    transition: .3s ease-out;
+}
+
+.pagination a:hover {
+    background-color: #0056b3;
 }

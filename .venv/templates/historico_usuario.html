@@ -18,6 +18,34 @@
     <div class="titulo">
         <h2>Histórico do {{nome_usuario}}</h2>
     </div>
+
+    <div class="pagination">
+        <ul>
+            {% if historico.prev_num %}
+                <li><a href="{{ url_for('historico_usuario', page=historico.prev_num) }}">Anterior</a></li>
+            {% else %}
+                <li class="disabled">Anterior</li>
+            {% endif %}
+
+            {% for page_num in historico.iter_pages() %}
+                {% if page_num %}
+                    {% if page_num == historico.page %}
+                        <li class="active"><span>{{ page_num }}</span></li>
+                    {% else %}
+                        <li><a href="{{ url_for('historico_usuario', page=page_num) }}">{{ page_num }}</a></li>
+                    {% endif %}
+                {% else %}
+                    <li class="disabled"><span>...</span></li>
+                {% endif %}
+            {% endfor %}
+            
+            {% if historico.next_num %}
+                <li><a href="{{ url_for('historico_usuario', page=historico.next_num) }}">Próxima</a></li>
+            {% else %}
+                <li class="disabled">Próxima</li>
+            {% endif %}
+        </ul>
+    </div>    
     
     <div class="historico_usuario">
             <table id="tabela" cellspacing="10">
@@ -43,6 +71,34 @@
                     {% endfor %}
                 </tbody>
             </table>
+    </div>
+
+    <div class="pagination">
+        <ul>
+            {% if historico.prev_num %}
+                <li><a href="{{ url_for('historico_usuario', page=historico.prev_num) }}">Anterior</a></li>
+            {% else %}
+                <li class="disabled">Anterior</li>
+            {% endif %}
+
+            {% for page_num in historico.iter_pages() %}
+                {% if page_num %}
+                    {% if page_num == historico.page %}
+                        <li class="active"><span>{{ page_num }}</span></li>
+                    {% else %}
+                        <li><a href="{{ url_for('historico_usuario', page=page_num) }}">{{ page_num }}</a></li>
+                    {% endif %}
+                {% else %}
+                    <li class="disabled"><span>...</span></li>
+                {% endif %}
+            {% endfor %}
+            
+            {% if historico.next_num %}
+                <li><a href="{{ url_for('historico_usuario', page=historico.next_num) }}">Próxima</a></li>
+            {% else %}
+                <li class="disabled">Próxima</li>
+            {% endif %}
+        </ul>
     </div>
 
 </body>

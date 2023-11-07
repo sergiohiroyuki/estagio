@@ -60,6 +60,7 @@ body {
     text-decoration: none;
     height: 30px;
     width: 80px;
+    transition: .3s ease-out;
 
 }
 
@@ -89,9 +90,12 @@ body {
 
 .header{
     display: flex;
-    background-color: black;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     padding: 1%;
     justify-content: flex-end;
+    font-family: 'Poppins';
 }
 
 .nav{
@@ -104,6 +108,7 @@ body {
     border: white solid 2px;
     border-radius: 10px;
     padding: 1%;
+    transition: .3s ease-out;
 }
 .logout:hover{
     color: white;
@@ -119,6 +124,7 @@ body {
     border: #FFFFFF solid 2px;
     border-radius: 10px;
     padding: 1%;
+    transition: .3s ease-out;
 }
 
 .historico:hover{

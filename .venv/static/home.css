@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: 'Poppins';
+}
+
+.home {
+    display: flex;
+    height: 100vh;
+}
+
+.container-left {
+    text-align: center;
+    border: 1px lightgreen solid;
+    flex-basis: 55%;
+    background-image: linear-gradient(to bottom right, rgb(7, 100, 0), rgb(98, 255, 0));
+
+}
+
+.container-right {
+    background-image: url("../static/img/imagem_soja_4.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    border: 1px lightgreen solid;
+    flex-basis: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.container-title {
+    margin: 1%;
+    border-radius: 15px;
+    margin-top: 35%;
+}
+
+.title {
+    margin-top: 20px;
+}
+
+.subtitle {
+    margin-top: 20px;
+}
+
+.button{
+    color: black;
+    text-decoration: none;
+    background-color: green;
+    padding: 1%;
+    font-size: 16px;
+    border: solid 2px;
+    border-radius: 10px;
+    transition: .3s ease-out;
+}
+
+.button:hover{
+    color: black;
+    text-decoration: none;
+    background-color: rgb(0, 203, 0);
+    padding: 1%;
+    font-size: 16px;
+    border: solid 2px;
+    border-radius: 10px;
+}

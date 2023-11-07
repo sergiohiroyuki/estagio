@@ -10,10 +10,38 @@
     
     <header class="header">
         <nav class="nav">
-            <a href="/logout" class="logout">Logout</a>
             <a href="/adm" class="pagina_usuarios">Gerenciar Usuarios</a>
+            <a href="/logout" class="logout">Logout</a>      
         </nav>
     </header>
+
+    <div class="pagination">
+        <ul>
+            {% if pagination.has_prev %}
+                <li><a href="{{ url_for('historico_geral', page=pagination.prev_num) }}">Anterior</a></li>
+            {% else %}
+                <li class="disabled"><span>Anterior</span></li>
+            {% endif %}
+    
+            {% for page_num in pagination.iter_pages() %}
+                {% if page_num %}
+                    {% if page_num == pagination.page %}
+                        <li class="active"><span>{{ page_num }}</span></li>
+                    {% else %}
+                        <li><a href="{{ url_for('historico_geral', page=page_num) }}">{{ page_num }}</a></li>
+                    {% endif %}
+                {% else %}
+                    <li class="disabled"><span>...</span></li>
+                {% endif %}
+            {% endfor %}
+    
+            {% if pagination.has_next %}
+                <li><a href="{{ url_for('historico_geral', page=pagination.next_num) }}">Próxima</a></li>
+            {% else %}
+                <li class="disabled"><span>Próxima</span></li>
+            {% endif %}
+        </ul>
+    </div>
 
     <div class="historico_geral">
         <table class="tabela" cellspacing="10">
@@ -44,6 +72,34 @@
 
             </tbody>
         </table>
+    </div>
+
+    <div class="pagination">
+        <ul>
+            {% if pagination.has_prev %}
+                <li><a href="{{ url_for('historico_geral', page=pagination.prev_num) }}">Anterior</a></li>
+            {% else %}
+                <li class="disabled"><span>Anterior</span></li>
+            {% endif %}
+    
+            {% for page_num in pagination.iter_pages() %}
+                {% if page_num %}
+                    {% if page_num == pagination.page %}
+                        <li class="active"><span>{{ page_num }}</span></li>
+                    {% else %}
+                        <li><a href="{{ url_for('historico_geral', page=page_num) }}">{{ page_num }}</a></li>
+                    {% endif %}
+                {% else %}
+                    <li class="disabled"><span>...</span></li>
+                {% endif %}
+            {% endfor %}
+    
+            {% if pagination.has_next %}
+                <li><a href="{{ url_for('historico_geral', page=pagination.next_num) }}">Próxima</a></li>
+            {% else %}
+                <li class="disabled"><span>Próxima</span></li>
+            {% endif %}
+        </ul>
     </div>
     
 </body>

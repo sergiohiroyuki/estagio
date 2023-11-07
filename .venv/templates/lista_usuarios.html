@@ -12,17 +12,29 @@
 
     <header class="header">
         <nav class="nav">
-            <a href="/logout" class="logout">logout</a>
             <a href="/historico_geral" class="historico">Historico Geral</a>
+            <a href="/logout" class="logout">logout</a> 
         </nav>      
     </header>
 
-    {% for message in get_flashed_messages() %}
-        <div class="certo">
-            <h3>{{message}}</h3>
-            <a href="/adm">X</a>
-        </div>   
-    {% endfor %} 
+    {% with messages = get_flashed_messages(with_categories=true, category_filter=["error", "success"]) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                {% if category == "error" %}
+                <div class="erro">
+                    <h3>{{ message }}</h3>
+                    <a href="/adm">X</a>
+                </div>
+                {% elif category == "success" %}
+                    <div class="certo">
+                        <h3>{{ message }}</h3>
+                        <a href="/adm">X</a>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif%}
+    {% endwith %}
+
         
 
     <div class="titulo">
@@ -94,7 +106,7 @@
                             <td>    {{ usuario_final['nome'] }} </td>
                             <td>    {{ usuario_final['email'] }}    </td>
                             <th>    *** </th>
-                            <th id="adm">    {{usuario_final['adm']}}    </th>
+                            <th>    {{usuario_final['adm']}}    </th>
                             <td>
                                 <a href="/adm/{{usuario_final.id}}/atualiza" class="atualizar">Atualizar</a>
                                 <a href="/adm/{{usuario_final.id}}" class="deletar">Deletar</a>
@@ -135,7 +147,9 @@
 
                 <a href="/adm" class="fechar">x</a>
 
-                <h2>Atualizando usuário {{usuario_atualiza.nome}}</h2>
+                <h2>Atualizando usuário <br>
+                    {{usuario_atualiza.nome}}
+                </h2>
                 <form action="/adm/{{usuario_atualiza.id}}/atualizar" method="POST">
                     <div class="formulario_atualizar">
                         <input type="text" id="nome" name="nome" value="{{usuario_atualiza.nome}}">
@@ -149,12 +163,12 @@
                         <button type="button" id="ver_senha_atualiza" onclick="mostrarOcultarSenhaAtualiza()">
                             <img src="\static\img\n_ve.png">
                         </button>
-                        <input type="password" id="senha_form" name="senha" value="{{usuario_atualiza.senha}}">
+                        <input type="password" id="senha_form" name="senha" value="">
                         <label for="senha">Senha:</label> 
                     </div>
                     <div class="checkbox_adm">
                         <label for="adm">Modificar permição</label>
-                        <input type="checkbox" id="adm_alterar" name="adm_alterar">
+                        <input type="checkbox" id="adm_alterar" name="adm_alterar" {% if usuario_atualiza.adm %} checked {% endif %}>
                     </div>
                     <div>
                         <input type="submit" value="Atualizar" class="input_atualizar">

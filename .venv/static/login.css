@@ -33,8 +33,9 @@ html{
     border: solid;
     border-radius: 15px;
     padding: 2%;
-    box-shadow: 3px 3px 1px 0px #00000070;
-    background-color: aliceblue;
+    background: rgba(255, 255, 255, 0.01);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
 }
 
 h2{
@@ -99,11 +100,20 @@ h2{
 }
 
 input[type="submit"]{
+    background-color:  rgb(40, 186, 0);
+    font-size: 15px;
+    padding:1%;
+    border: solid 1px black;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: .3s ease-out;
+}
+
+input[type="submit"]:hover{
     background-color: rgb(89, 255, 43);
     padding:1%;
     border: solid 1px black;
     border-radius: 8px;
-    box-shadow: 3px 3px 1px 0px #00000070;
     cursor: pointer;
 }
 
