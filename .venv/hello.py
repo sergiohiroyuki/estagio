@@ -400,6 +400,8 @@ def resultados(select_city):
              labels={'Ano': 'Ano', 'value': 'Produção de Soja'},
              title=f'Produção de Soja - Nome da Cidade - {select_city}')
     
+    imagem_do_grafico.fillna('- -', inplace=True)
+    
     return render_template("resultados.html", usuario = usuario, grafico_de_linha = fig_linha.to_html(), grafico_de_barras = fig_barra.to_html(), tabela = imagem_do_grafico.to_html())
 
 @app.route('/historico_usuario', methods=["GET"])
