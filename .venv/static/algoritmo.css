@@ -15,7 +15,7 @@ html {
 body {
     margin: 0 0 var(--header-height) 0;
     font-family: 'Poppins';
-    background-image: url("../static/img/por_do_sol1.jpg");
+    background-image: url("../static/img/imagem_soja_1.jpg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -36,9 +36,11 @@ body {
     padding: 1.5rem;
     text-align: center;
     justify-content: center;
-    border: solid black;
+    border: solid 3px rgb(152, 152, 152);
     border-radius: 1rem;
-    background-color: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     padding-bottom: 5rem;
     padding-top: 5rem;
     margin-bottom: 30px;

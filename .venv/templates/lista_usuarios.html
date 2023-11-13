@@ -90,24 +90,24 @@
             <table id="tabela" cellspacing="10">
                 <thead id="">
                     <tr>
-                        <th>    ID  </th>
-                        <th>    Nome    </th>
-                        <th>    Email   </th>
-                        <th>    Senha   </th>
-                        <th>    ADM </th>
-                        <th>    Ações   </th>  
+                        <th class="id_usuario">    ID  </th>
+                        <th class="info_usuario">    Nome    </th>
+                        <th class="info_usuario">    Email   </th>
+                        <th class="info_usuario">     Senha   </th>
+                        <th class="info_usuario">    ADM </th>
+                        <th class="info_usuario">    Ações   </th>  
 
                     </tr>
                 </thead>
                 <tbody>
                     {% for usuario_final in usuario_final %}
                         <tr>
-                            <td>    {{ usuario_final['id'] }}   </td>
-                            <td>    {{ usuario_final['nome'] }} </td>
-                            <td>    {{ usuario_final['email'] }}    </td>
-                            <th>    *** </th>
-                            <th>    {{usuario_final['adm']}}    </th>
-                            <td>
+                            <td class="id_usuario">    {{ usuario_final['id'] }}   </td>
+                            <td class="info_usuario">    {{ usuario_final['nome'] }} </td>
+                            <td class="info_usuario">    {{ usuario_final['email'] }}    </td>
+                            <th class="info_usuario">    *** </th>
+                            <th class="info_usuario">    {{usuario_final['adm']}}    </th>
+                            <td class="acoes">
                                 <a href="/adm/{{usuario_final.id}}/atualiza" class="atualizar">Atualizar</a>
                                 <a href="/adm/{{usuario_final.id}}" class="deletar">Deletar</a>
                             </td>

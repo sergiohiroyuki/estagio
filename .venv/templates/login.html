@@ -38,7 +38,7 @@
                     <label for="nome">Nome</label>
                 </div>
                 <div class="input">
-                    <button type="button" id="ver_senha" onclick="mostrarOcultarSenha()"><img src="../static/img/n_ve.png"></button>
+                    <button type="button" id="ver_senha" onclick="mostrarOcultarSenha()"><img src="../static/img/invisible.png"></button>
                     <input type="password" id="senha" name="senha" placeholder=" ">
                     <label for="senha">Senha</label>
                 </div>
@@ -60,10 +60,10 @@
 
             if (senha.type === 'password') {
                 senha.setAttribute('type', 'text');
-                imagem.setAttribute('src', '../static/img/ve.png'); 
+                imagem.setAttribute('src', '../static/img/eye.png'); 
             } else {
                 senha.type = 'password';
-                imagem.setAttribute('src', '../static/img/n_ve.png'); 
+                imagem.setAttribute('src', '../static/img/invisible.png'); 
                 }
             }
         </script>
