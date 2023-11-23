@@ -27,13 +27,25 @@ body{
     background: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    padding: 1%;
-    justify-content: flex-end;
     font-family: 'Poppins';
 }
 
 .nav{
+    display: flex;
+    justify-content: flex-end;
     width: 15%;
+    align-items: center;
+    flex-basis: 25%;
+    gap: 2%;
+    padding-left: 1%;
+}
+
+.titulo{
+    display: flex;
+    justify-content: center;
+    color: white;
+    flex-basis: 75%;
+    margin-left: 40vh;
 }
 
 .logout{

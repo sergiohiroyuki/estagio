@@ -24,8 +24,6 @@ class Grafico_1():
         regressor = lgb.LGBMRegressor(learning_rate=0.11, min_samples_leaf=14)
         regressor.fit(X_train, y_train)
 
-        # Supondo que df_producao_clima e regressor já foram definidos anteriormente
-
         # Filtrar o DataFrame para incluir apenas a cidade desejada
         dicionario = {
             'Abatiá': 4100103, 'Altamira do Paraná': 4100459, 'Alto Paraná': 4100608, 'Alto Piquiri': 4100707, 'Altônia': 4100509, 
@@ -98,7 +96,7 @@ class Grafico_1():
         }
 
         nome_cidade = self.nome_cidade
-        codigo_ibge_desejado = dicionario[nome_cidade]  # Substitua pelo código IBGE desejado
+        codigo_ibge_desejado = dicionario[nome_cidade] 
         dados_cidade_desejada = df_producao_clima[df_producao_clima['codigo_ibge'] == codigo_ibge_desejado]
 
         # Resetar o índice do DataFrame filtrado
@@ -117,7 +115,7 @@ class Grafico_1():
         dados_cidade_desejada_predicao = dados_futuros[dados_futuros['codigo_ibge'] == codigo_ibge_desejado]
 
         # Fazer previsões para os anos futuros
-        X_futuro = dados_cidade_desejada_predicao.drop(['date', 'data', 'codigo_ibge'], axis=1)  # Remova a coluna de ano para prever
+        X_futuro = dados_cidade_desejada_predicao.drop(['date', 'data', 'codigo_ibge'], axis=1) 
         predicao_futuro = regressor.predict(X_futuro)
 
         # Concatenar as previsões passadas e futuras

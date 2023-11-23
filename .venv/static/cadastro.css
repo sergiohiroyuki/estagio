@@ -12,20 +12,25 @@ html {
 }
 
 body{
-    background-image: url("../static/img/imagem_soja_2.jpg");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
     position: relative;
     font-family: 'Poppins';
 }
 
-.titulo{
-    display: flex;
-    justify-content: center;
-    margin-top: 1%;
-    font-family: 'Poppins';
+body::before{
+    content: "";
+    background-image: url("../static/img/imagem_soja_2.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0.66;
+    z-index: -1;
 }
+
 
 section.modal{
     position: fixed;
@@ -73,6 +78,7 @@ section.modal div#card a#fechar:hover{
     position: absolute;
     right: 2%;
     top: 1%;
+    width: 7%;
     font-size: x-large;
     font-family: 'Poppins';
     text-decoration: none;
@@ -103,7 +109,7 @@ section.modal div#card div#botoes a{
     text-decoration: none;
     padding: 3%;
     border: solid;
-    border-radius: 10%;
+    border-radius: 10px;
 }
 
 section.modal div#card div#botoes a#confirmar{
@@ -137,7 +143,7 @@ section.modal div#card div#botoes a#cancelar:hover{
     display: flex;
     justify-content: center;
     width: 100%;
-    margin-top: none;
+    margin-top: 1%;
 }
 
 .cadastrar{
@@ -347,13 +353,33 @@ div#tabela_usuarios section#usuario table#tabela{
     background: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    padding: 1%;
     justify-content: flex-end;
     font-family: 'Poppins';
 }
 
 .nav{
+    display: flex;
+    justify-content: flex-end;
     width: 15%;
+    align-items: center;
+    flex-basis: 25%;
+    gap: 2%;
+}
+
+.titulo{
+    display: flex;
+    justify-content: center;
+    color: white;
+    flex-basis: 75%;
+    margin-left: 40vh;
+}
+
+.titulo2{
+    display: flex;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
 }
 
 .logout{

@@ -14,11 +14,25 @@ html {
 body{
     margin: 0 0 var(--header-height) 0;
     font-family: 'Poppins';
+    
+    position: relative;
+}
+
+body::before{
+    margin: 0 0 var(--header-height) 0;
+    height: 100vh;
+    content: "";
     background-image: url("../static/img/imagem_soja_2.jpg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0.66;
+    z-index: -1;
 }
 
 /*nav bar*/
@@ -27,13 +41,25 @@ body{
     background: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    padding: 1%;
-    justify-content: flex-end;
+    padding: .5%;
     font-family: 'Poppins';
 }
 
 .nav{
+    display: flex;
+    justify-content: flex-end;
     width: 15%;
+    align-items: center;
+    flex-basis: 10%;
+    gap: 3%;
+}
+
+.titulo{
+    display: flex;
+    justify-content: center;
+    color: white;
+    flex-basis: 90%;
+    margin-left: 25vh;
 }
 
 .logout{
@@ -110,13 +136,6 @@ body{
     display: flex;
     justify-content: center;
     padding: 1% 5% 1% 5%
-}
-
-.titulo{
-    display: flex;
-    justify-content: center;
-    padding-top: 1%;
-    color: white;
 }
 
 .acoes{

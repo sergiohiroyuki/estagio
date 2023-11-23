@@ -5,19 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Historico do Usuario</title>
     <link rel="stylesheet" href="/static/historico_usuario.css">
+    <link rel="icon" type="image/png" href="/static/img/novo_icone_soja-removebg-preview.png">
 </head>
 <body>
 
     <header class="header">
+        <div class="titulo">
+            <h2>Histórico do {{nome_usuario}}</h2>
+        </div>
         <nav class="nav">
-            <a href="/logout" class="logout">Logout</a>
             <a href="/inicial" class="algoritmo">Algoritmo</a>
+            <a href="/logout" class="logout">Logout</a>
         </nav>
     </header>
 
-    <div class="titulo">
-        <h2>Histórico do {{nome_usuario}}</h2>
-    </div>
+    
 
     <div class="pagination">
         <ul>
@@ -101,5 +103,6 @@
         </ul>
     </div>
 
+    
 </body>
 </html>

@@ -7,8 +7,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 from flask_paginate import Pagination, get_page_args
 from werkzeug.security import generate_password_hash, check_password_hash
-
-
+import re
 
 
 app = Flask(__name__)
@@ -118,16 +117,32 @@ def criar_usuario():
                         flash("Campo Precisa Ser Prenchido", "error")
                         return redirect("/adm")
                     
+                    regex_email = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+
+                    if not(re.match(regex_email, email)):
+                        flash("e-mail precisar ter esse formato", "error")
+                        return redirect("/adm")
+                    
                     if(not senha):
                         print("vasio")
                         flash("Campo Precisa Ser Prenchido", "error")
+                        return redirect("/adm")
+
+                    if(len(senha) < 8):
+                        flash("Senha precisa ter 8 caracteres no mínimo", "error")
+                        return redirect("/adm")
+                    
+                    regex_senha = re.compile(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).{8,}$')
+
+                    if not(regex_senha.match(senha)):
+                        flash("Senha precisa ter caracteres especiais(!@#$%¨&*), letra maiúsculas e minúsculas e conter valores numéricos", "error")
                         return redirect("/adm")
                     
                     senha_hash = generate_password_hash(senha)
 
                     usuario = Usuario(nome, email, senha_hash, adm)
-                    app.logger.info("Usuario criado com sucesso")
-                    flash("Usuario Cadastrado com Sucesso!!", "success")
+                    app.logger.info("Usuário criado com sucesso")
+                    flash("Usuário Cadastrado com Sucesso!!", "success")
                     db.session.add(usuario)
                     db.session.commit()
                     return redirect("/adm")
@@ -167,6 +182,7 @@ def atualiza_usuario(id):
             flash("Email já Cadastrado", "error")
             app.logger.info("Email já Cadastrado")
             return redirect("/adm")
+        
                             
         usuario_nome = Usuario.query.filter_by(nome=nome).first()
         if(usuario_nome):
@@ -183,18 +199,37 @@ def atualiza_usuario(id):
         
         
         if(not nome):
+            print("vasio")
             flash("Campo Precisa Ser Prenchido", "error")
             return redirect("/adm")
+        
         if(not email):
+            print("vasio")
             flash("Campo Precisa Ser Prenchido", "error")
+            return redirect("/adm")
+        
+        regex_email = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+
+        if not(re.match(regex_email, email)):
+            flash("e-mail precisar ter esse formato", "error")
             return redirect("/adm")
 
+        
 
         usuario_objeto.nome = nome
         usuario_objeto.email = email
         app.logger.info(senha)
         app.logger.info(usuario_objeto.senha)
         if(senha):
+            if(len(senha) < 8):
+                flash("Senha precisa ter 8 caracteres no mínimo", "error")
+                return redirect("/adm")
+        
+            regex_senha = re.compile(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).{8,}$')
+
+            if not(regex_senha.match(senha)):
+                flash("Senha precisa ter caracteres especiais(!@#$%¨&*), letra maiúsculas e minúsculas e conter valores numéricos", "error")
+                return redirect("/adm")
             app.logger.info(senha)
             app.logger.info(usuario_objeto.senha)
             usuario_objeto.senha = generate_password_hash(senha)
@@ -207,7 +242,7 @@ def atualiza_usuario(id):
         else:
             usuario_objeto.adm = False
 
-        flash("Usuario Atualizado com Sucesso!!", "success")
+        flash("Usuário Atualizado com Sucesso!!", "success")
         db.session.commit()
         return redirect('/adm')
     return redirect("/inicial")
@@ -233,7 +268,7 @@ def deleta_usuario(id):
     if(usuario.adm == True):
         usuario_objeto = Usuario.query.get(id)
         try:
-            flash("Usuario Deletado com Sucesso!!", "success")
+            flash("Usuário Deletado com Sucesso!!", "success")
             db.session.delete(usuario_objeto)
             db.session.commit()
             return redirect("/adm")
@@ -259,12 +294,12 @@ def login():
             if(check_password_hash(usuario.senha, senha) ):
                 login_user(usuario)
                 if(usuario.adm == True):
-                    flash("Usuario logado com sucesso!!" , "success")
+                    flash("Usuário logado com sucesso!!" , "success")
                     return redirect("/adm")
                 else:
-                    flash("Usuario logado com sucesso!!", "success")
+                    flash("Usuário logado com sucesso!!", "success")
                     return redirect("/inicial")
-            flash("Verifique o Nome ou a Senha!!", "error")
+        flash("Verifique o Nome ou a Senha!!", "error")
         return redirect("/login")
     return render_template("login.html")
 
@@ -272,7 +307,7 @@ def login():
 @login_required
 def log_out():
     logout_user()
-    flash("Usuario Saiu da Aplicação com Sucesso!!", "success")
+    flash("Usuário Saiu da Aplicação com Sucesso!!", "success")
     return redirect("/login")
 
 @app.route("/inicial")
@@ -396,7 +431,7 @@ def resultados(select_city):
                       labels={'Ano': 'Ano', 'value': 'Produção de Soja'}, title=f'Produção de Soja - Nome da Cidade - {select_city}')
 
     fig_barra = px.bar(imagem_do_grafico, x='Ano', y=['Valores Previstos (Passado)', 'Valores Reais', 'Valores Previstos (Futuros)'],
-             barmode='group', # Isso garante que as barras fiquem lado a lado
+             barmode='group',
              labels={'Ano': 'Ano', 'value': 'Produção de Soja'},
              title=f'Produção de Soja - Nome da Cidade - {select_city}')
     
@@ -408,7 +443,7 @@ def resultados(select_city):
 @login_required
 def historico_usuario():
     page = request.args.get('page', type=int, default=1)
-    per_page = 10  # Defina o número de itens por página conforme necessário
+    per_page = 10
     id = current_user.id
     nome_usuario = current_user.nome
 
@@ -419,8 +454,8 @@ def historico_usuario():
 @app.route('/historico_geral', methods=['GET'])
 @login_required
 def historico_geral():
-    page = request.args.get('page', 1, type=int)  # Obtém o número da página da URL, padrão é 1
-    per_page = 10  # Número de registros por página
+    page = request.args.get('page', 1, type=int) 
+    per_page = 10  
     id_usuario = current_user.id
     usuario = Usuario.query.get(id_usuario)
     

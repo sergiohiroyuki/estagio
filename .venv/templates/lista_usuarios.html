@@ -6,11 +6,15 @@
     <title>Lista de Usuários</title>
     <link rel="stylesheet" href="/static/cadastro.css">
     <link rel="stylesheet" href="/static/flash_messages.css">
+    <link rel="icon" type="image/png" href="/static/img/novo_icone_soja-removebg-preview.png">
 </head>
 
 <body>
 
     <header class="header">
+        <div class="titulo">
+            <h1>Usuários</h1>   
+        </div>
         <nav class="nav">
             <a href="/historico_geral" class="historico">Historico Geral</a>
             <a href="/logout" class="logout">logout</a> 
@@ -36,10 +40,6 @@
     {% endwith %}
 
         
-
-    <div class="titulo">
-        <h1>Cadastrar Usuário</h1>   
-    </div>
     
     <div class="cadastrar_usuario">
         <div class="cadastrar">
@@ -48,12 +48,12 @@
             <form action="/adm/cadastrar" method="POST">
 
                 <div class="formulario">
-                    <input type="text" id="nome" name="nome" placeholder=" ">
+                    <input type="text" id="nome" name="nome" placeholder=" " maxlength="45">
                     <label for="nome">  Nome</label>
                 </div>
                 
                 <div class="formulario">
-                    <input type="email" id="email" name="email" placeholder=" ">
+                    <input type="email" id="email" name="email" placeholder=" " maxlength="45">
                     <label for="email">Email</label>
                 </div>
                 
@@ -81,8 +81,8 @@
     </div>
     
 
-    <div class="titulo">
-        <h1>Lista de Usuários</h1>   
+    <div class="titulo2">
+        <h1>Listagem de Usuários</h1>   
     </div>
 
     <div id="tabela_usuarios">
